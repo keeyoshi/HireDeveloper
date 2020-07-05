@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "344094824950",
+    "firebase_url": "https://hiredevelopers-66a58.firebaseio.com",
+    "project_id": "hiredevelopers-66a58",
+    "storage_bucket": "hiredevelopers-66a58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344094824950:android:ef9e252d2dbfc0d9c64fd7",
+        "android_client_info": {
+          "package_name": "com.theakatsuki.hiredevelopers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344094824950-eif3rk5pd02udbd6c3jj09g7m588rp3b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theakatsuki.hiredevelopers",
+            "certificate_hash": "c95be8d6aab41469d3a3ed47f530cd23ce434b7d"
+          }
+        },
+        {
+          "client_id": "344094824950-phn0sdvcaj0jih5acicmd6mnjmdog745.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqDyKDDNZPqdqq3uf7bf3-DqZddvMxzfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344094824950-phn0sdvcaj0jih5acicmd6mnjmdog745.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
