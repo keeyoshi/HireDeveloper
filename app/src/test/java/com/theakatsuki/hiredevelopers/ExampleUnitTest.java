@@ -11,7 +11,17 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
+
     public void addition_isCorrect() {
         assertEquals(6, 2 + 2);
+    }
+
+
+    public class UnitTesting {
+        @Test
+
+        public void addition_isCorrect() {
+            assertEquals(6, 2 + 2);
+        }
     }
 }
