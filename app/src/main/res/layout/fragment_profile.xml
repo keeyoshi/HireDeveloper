@@ -4,17 +4,145 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     tools:context=".ui.profile.ProfileFragment">
 
-<TextView
-    android:text="Ninjeng is here "
-    android:textSize="30dp"
-    android:layout_width="wrap_content"
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="305dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="45dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/profileUsername"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#040000"
+                android:textStyle="bold"
+                android:textSize="21sp"/>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="400dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="205dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Posts"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/profilePost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="#2D8BD6"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Followers"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/profleFollowers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="#2D8BD6"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Following"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/profileFollowing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="#2D8BD6"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+<Button
+    android:id="@+id/editProfile"
+    android:text="@string/title_edit"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
-    <TextView
-        android:text="Keeyoshi the teacher  "
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1db995" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabLayout"
+        tools:layout_editor_absoluteX="8dp"/>
+</RelativeLayout>
 
 </LinearLayout>
