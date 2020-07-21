@@ -4,21 +4,33 @@ public class User {
     String id;
     String fullname;
     String phoneNumber;
-    String username;
+    String work;
+    String country;
     String email;
     String password;
+    String profileImage;
 
 
     public User() {
     }
 
-    public User(String id, String fullname, String phoneNumber, String username, String email, String password) {
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public User(String id, String fullname, String phoneNumber, String work, String country, String email, String password, String profileImage) {
         this.id = id;
         this.fullname = fullname;
         this.phoneNumber = phoneNumber;
-        this.username = username;
+        this.work = work;
+        this.country = country;
         this.email = email;
         this.password = password;
+        this.profileImage = profileImage;
     }
 
     public String getId() {
@@ -41,12 +53,20 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUsername() {
-        return username;
+    public String getWork() {
+        return work;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setWork(String work) {
+        this.work = work;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public void setId(String id) {

@@ -1,4 +1,4 @@
-package com.theakatsuki.hiredevelopers.ActivityPackage;
+package com.theakatsuki.hiredevelopers.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,7 @@ import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText username, password,fullname,phoneNumber, email;
+    EditText username, password,fullname,phoneNumber, email,work;
     Button btnRegister;
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
@@ -30,11 +30,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         firebaseAuth = FirebaseAuth.getInstance();
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.country);
         progressBar= findViewById(R.id.progressbar);
         password = findViewById(R.id.password);
         email = findViewById(R.id.email);
         fullname = findViewById(R.id.name);
+        work = findViewById(R.id.workPlace);
         phoneNumber = findViewById(R.id.phonenumber);
         btnRegister = findViewById(R.id.register);
 
@@ -45,15 +46,17 @@ public class RegisterActivity extends AppCompatActivity {
                 final String userName = username.getText().toString();
                 final String pass = password.getText().toString();
                 final String name = fullname.getText().toString();
+                final String workP = work.getText().toString();
                 final String emailaddress = email.getText().toString();
                 final String  number= phoneNumber.getText().toString();
+                final String image = "Default";
                 firebaseAuth.createUserWithEmailAndPassword(emailaddress,pass)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if( task.isSuccessful())
                                 {
-                                    User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(),name,number,userName,emailaddress,pass);
+                                    User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(),name,number,workP,userName,emailaddress,pass,image);
                                     FirebaseDatabase.getInstance().getReference("Users")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                             .setValue(user);
