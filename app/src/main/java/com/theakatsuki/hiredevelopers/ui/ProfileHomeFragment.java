@@ -33,13 +33,12 @@ public class ProfileHomeFragment extends Fragment {
     RecyclerView recyclerView;
     FirebaseUser firebaseUser;
     List<Events> events;
-    String userId="";
+    private String userid;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_profile_home, container, false);
-//        Bundle bundle = getArguments();
-//        userId = bundle.getString("UID");
         recyclerView = view.findViewById(R.id.profilehomerecycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -67,4 +66,9 @@ public class ProfileHomeFragment extends Fragment {
         });
         return view;
     }
+    public void getUserID(String userid)
+    {
+        this.userid = userid;
+    }
+
 }

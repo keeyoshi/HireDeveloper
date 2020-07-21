@@ -98,8 +98,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
            public void onClick(View view) {
 
                Intent intent = new Intent(myContext, ProfileActivity.class);
+//               ProfileHomeFragment profileHomeFragment = new ProfileHomeFragment();
+//               profileHomeFragment.getUserID(event.getUserid());
                intent.putExtra("UID",event.getUserid());
                myContext.startActivity(intent);
+
            }
        });
 

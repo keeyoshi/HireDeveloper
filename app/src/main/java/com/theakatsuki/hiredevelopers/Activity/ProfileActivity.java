@@ -35,7 +35,6 @@ public class ProfileActivity extends AppCompatActivity {
     TextView name;
     Intent intent;
     ViewPager viewPager;
-    String UserID="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +43,13 @@ public class ProfileActivity extends AppCompatActivity {
         tabLayout=findViewById(R.id.tab_layout);
         viewPager=findViewById(R.id.view_pager);
         intent = getIntent();
-        UserID  = intent.getStringExtra("UID");
+        String UserID  = intent.getStringExtra("UID");
 
         profileImage = findViewById(R.id.profileImage);
         name = findViewById(R.id.profileUsername);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("UID",UserID);
 //        ProfileHomeFragment profileHomeFragment = new ProfileHomeFragment();
-//        profileHomeFragment.setArguments(bundle);
-//        getSupportFragmentManager().beginTransaction().replace(R.id.container,profileHomeFragment).commit();
+//        profileHomeFragment.getUserID(UserID);
+//        getSupportFragmentManager().beginTransaction().add(R.id.frame123,profileHomeFragment).commit();
         ViewpagerAdapter viewpagerAdapter = new ViewpagerAdapter(getSupportFragmentManager());
         viewpagerAdapter.addFragments(new ProfileHomeFragment(),"Home");
         viewpagerAdapter.addFragments(new AboutUsFragment(),"About");

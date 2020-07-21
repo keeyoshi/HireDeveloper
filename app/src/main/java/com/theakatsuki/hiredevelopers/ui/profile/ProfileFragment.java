@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.theakatsuki.hiredevelopers.Activity.AddEventActivity;
+import com.theakatsuki.hiredevelopers.Activity.EditProfileActivity;
 import com.theakatsuki.hiredevelopers.Activity.ProfileActivity;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
@@ -55,7 +56,7 @@ public class ProfileFragment extends Fragment {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ProfileActivity.class);
+                Intent intent = new Intent(getContext(), EditProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +75,7 @@ public class ProfileFragment extends Fragment {
                 User user = dataSnapshot.getValue(User.class);
                 if(user.getProfileImage().equals("Default"))
                 {
-                    profileImage.setImageResource(R.mipmap.ic_launcher);
+                    profileImage.setImageResource(R.drawable.male);
                 }
                 else {
                     Glide.with(getContext()).load(user.getProfileImage()).into(profileImage);
