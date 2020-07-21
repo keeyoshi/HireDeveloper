@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="25dp"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userProfileImage"
+        android:src="@drawable/hiredeveloper"
+        android:layout_width="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="60dp"/>
+    <TextView
+        android:id="@+id/proUsername"
+        android:text="Ninjeng lama "
+        android:layout_toRightOf="@+id/userProfileImage"
+        android:layout_marginLeft="15dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/followersNumber"
+        android:text="22"
+        android:layout_below="@id/proUsername"
+        android:layout_toRightOf="@id/userProfileImage"
+        android:layout_marginLeft="15dp"
+        android:textSize="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="@string/title_followers"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/proUsername"
+        android:textSize="12dp"
+        android:layout_toRightOf="@id/followersNumber"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/countryName"
+        android:text="Nepal"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/followersNumber"
+        android:textSize="12dp"
+        android:layout_toRightOf="@id/userProfileImage"
+        android:layout_marginLeft="15dp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/eventContent"
+        android:layout_marginTop="10dp"
+        android:text="@string/title_content"
+        android:layout_width="match_parent"
+        android:layout_below="@id/userProfileImage"
+        android:textSize="14dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/ContentImage"
+        android:src="@drawable/welcome"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        android:layout_below="@id/eventContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

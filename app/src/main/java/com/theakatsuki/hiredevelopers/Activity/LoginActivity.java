@@ -1,4 +1,4 @@
-package com.theakatsuki.hiredevelopers.ActivityPackage;
+package com.theakatsuki.hiredevelopers.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.theakatsuki.hiredevelopers.MainActivity;
 import com.theakatsuki.hiredevelopers.R;
 
 public class LoginActivity extends AppCompatActivity {

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#554322"
     android:layout_height="match_parent"
-    tools:context="com.theakatsuki.hiredevelopers.ActivityPackage.LoginActivity">
+    tools:context="com.theakatsuki.hiredevelopers.Activity.LoginActivity">
 
 
     <EditText

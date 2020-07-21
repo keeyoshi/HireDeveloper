@@ -9,4 +9,7 @@
     <string name="title_login">Login</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_edit">Edit Profile</string>
+    <string name="title_followers">followers</string>
+    <string name="title_content">Welcome to Hire developers were we solve the problems that you are facing</string>
+    <string name="add_event_hint">What is on your mind? </string>
 </resources>
