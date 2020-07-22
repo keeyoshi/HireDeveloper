@@ -12,4 +12,6 @@
     <string name="title_followers">followers</string>
     <string name="title_content">Welcome to Hire developers were we solve the problems that you are facing</string>
     <string name="add_event_hint">What is on your mind? </string>
+    <string name="confirmPassword">Confirm password </string>
+    <string name="editProfile">Edit profile </string>
 </resources>
