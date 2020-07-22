@@ -14,44 +14,116 @@
         android:layout_width="wrap_content"
         android:src="@mipmap/ic_launcher"
         android:layout_height="200dp"/>
+
     <ProgressBar
         android:id="@+id/editProgressBar"
         android:layout_width="match_parent"
         android:visibility="invisible"
         android:layout_height="wrap_content"/>
+
     <EditText
         android:id="@+id/editName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_design"
+        android:hint="  Full Name"
+        android:layout_margin="6dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textColorHint="#000"/>
+
     <EditText
         android:id="@+id/editCountry"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_design"
+        android:hint="  Country"
+        android:layout_margin="6dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textColorHint="#000"/>
+
     <EditText
         android:id="@+id/editPhoneNumber"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_design"
+        android:hint="  Phone Number"
+        android:inputType="number"
+        android:layout_margin="6dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textColorHint="#000"/>
+
     <EditText
         android:id="@+id/editWorking"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_design"
+        android:hint="  Working"
+        android:inputType="text"
+        android:layout_margin="6dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textColorHint="#000"/>
+
     <EditText
         android:id="@+id/editEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_design"
+        android:hint="  Email"
+        android:inputType="textEmailAddress"
+        android:layout_margin="6dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textColorHint="#000"/>
+
     <EditText
         android:id="@+id/editPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_design"
+        android:hint="  Password"
+        android:inputType="textPassword"
+        android:layout_margin="6dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textColorHint="#000"/>
+
     <EditText
         android:id="@+id/editConfirmPassword"
         android:layout_width="match_parent"
-        android:hint="Confirm password"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_design"
+        android:hint="  Confirm Password"
+        android:inputType="textPassword"
+        android:layout_margin="6dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textColorHint="#000"/>
+
 <Button
     android:id="@+id/btnEditProfile"
     android:text="@string/editProfile"
     android:layout_width="match_parent"
+    android:background="@drawable/button"
+    android:textAllCaps="true"
+    android:textSize="26dp"
+    android:layout_margin="6dp"
     android:layout_height="wrap_content"/>
 
 
