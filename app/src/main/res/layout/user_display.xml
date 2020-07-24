@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_marginTop="10dp"
     android:layout_marginBottom="25dp"
     android:layout_height="wrap_content">
 
@@ -22,24 +21,28 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btnFollow"
+    <TextView
+        android:id="@+id/followersNumber"
+        android:text="22"
+        android:layout_below="@id/proUsername"
+        android:layout_toRightOf="@id/userProfileImage"
+        android:layout_marginLeft="15dp"
+        android:textSize="12dp"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@id/proUsername"
-        android:background="#FAFAFA"
-        android:text="Follow"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14dp"
-        android:textStyle="bold" />
-
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="@string/title_followers"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/proUsername"
+        android:textSize="12dp"
+        android:layout_toRightOf="@id/followersNumber"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/countryName"
         android:text="Nepal"
         android:layout_width="wrap_content"
-        android:layout_below="@id/proUsername"
+        android:layout_below="@id/followersNumber"
         android:textSize="12dp"
         android:layout_toRightOf="@id/userProfileImage"
         android:layout_marginLeft="15dp"
@@ -62,55 +65,6 @@
         android:layout_below="@id/eventContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="#FAFAFA"
-        android:layout_below="@+id/ContentImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginHorizontal="50dp"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="200dp"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/btnLike"
-                    android:src="@drawable/ic_baseline_thumb_up_24"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"/>
-                <TextView
-                    android:text="Like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="200dp"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/btnComment"
-                    android:src="@drawable/ic_baseline_comment_24"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"/>
-                <TextView
-                    android:text="Comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>
