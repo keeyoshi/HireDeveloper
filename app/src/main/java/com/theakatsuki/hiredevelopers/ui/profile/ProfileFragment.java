@@ -24,8 +24,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.theakatsuki.hiredevelopers.Activity.AddEventActivity;
 import com.theakatsuki.hiredevelopers.Activity.EditProfileActivity;
 import com.theakatsuki.hiredevelopers.Activity.ProfileActivity;
+import com.theakatsuki.hiredevelopers.Model.Follow;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProfileFragment extends Fragment {
@@ -36,6 +40,7 @@ public class ProfileFragment extends Fragment {
     Button btnAddEvents;
     FirebaseUser firebaseUser;
     DatabaseReference reference;
+    List<Follow> followList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,7 +96,54 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow").child(firebaseUser.getUid()).child("Following");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists())
+                {
+                    following.setText(dataSnapshot.getChildrenCount()+"");
+                }
+                else
+                {
+                    following.setText("0");
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Follow").child(firebaseUser.getUid()).child("Followers");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    followers.setText(dataSnapshot.getChildrenCount()+"");
+                }
+                else
+                {
+                    followers.setText("0");
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         return view;
 
     }
+
 }

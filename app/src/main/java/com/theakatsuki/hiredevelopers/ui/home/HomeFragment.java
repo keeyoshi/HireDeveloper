@@ -36,7 +36,6 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
 
-    List<User> users;
     List<Events> events;
     DatabaseReference reference;
     FirebaseUser firebaseUser;
@@ -52,12 +51,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-//        users = new ArrayList<>();
         events = new ArrayList<>();
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         progressBar = root.findViewById(R.id.progressbarRecycleView);
-
         readEvents();
         return root;
     }
@@ -65,25 +61,7 @@ public class HomeFragment extends Fragment {
     public void readEvents()
     {
         progressBar.setVisibility(View.VISIBLE);
-//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-//                {
-//                    User user = dataSnapshot1.getValue(User.class);
-//                    users.add(user);
-//                }
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//
-//        });
+
         reference = FirebaseDatabase.getInstance().getReference("Events");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -94,7 +72,7 @@ public class HomeFragment extends Fragment {
                     events.add(event);
                     progressBar.setVisibility(View.GONE);
                 }
-                homeAdapter = new HomeAdapter(getContext(),events);
+                homeAdapter = new HomeAdapter(getContext(),events,firebaseUser.getUid());
                 recyclerView.setAdapter(homeAdapter);
             }
 

@@ -47,16 +47,16 @@ public class RegisterActivity extends AppCompatActivity {
                 final String pass = password.getText().toString();
                 final String name = fullname.getText().toString();
                 final String workP = work.getText().toString();
-                final String emailaddress = email.getText().toString();
+                final String emailAddress = email.getText().toString();
                 final String  number= phoneNumber.getText().toString();
                 final String image = "Default";
-                firebaseAuth.createUserWithEmailAndPassword(emailaddress,pass)
+                firebaseAuth.createUserWithEmailAndPassword(emailAddress,pass)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if( task.isSuccessful())
                                 {
-                                    User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(),name,number,workP,userName,emailaddress,pass,image);
+                                    User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(),name,number,workP,userName,emailAddress,pass,image);
                                     FirebaseDatabase.getInstance().getReference("Users")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                             .setValue(user);
