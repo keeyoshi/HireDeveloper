@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.theakatsuki.hiredevelopers.Adapter.HomeAdapter;
+import com.theakatsuki.hiredevelopers.Adapter.ProfileHomeAdapter;
 import com.theakatsuki.hiredevelopers.Model.Events;
 import com.theakatsuki.hiredevelopers.R;
 
@@ -55,8 +56,8 @@ public class ProfileHomeFragment extends Fragment {
                         events.add(event);
                     }
                 }
-                HomeAdapter homeAdapter = new HomeAdapter(getContext(),events);
-                recyclerView.setAdapter(homeAdapter);
+                ProfileHomeAdapter profileHomeFragment = new ProfileHomeAdapter(getContext(),events);
+                recyclerView.setAdapter(profileHomeFragment);
             }
 
             @Override
@@ -64,6 +65,7 @@ public class ProfileHomeFragment extends Fragment {
 
             }
         });
+
         return view;
     }
     public void getUserID(String userid)

@@ -116,7 +116,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     hashMap.put("work",work.getText().toString());
                     databaseReference.updateChildren(hashMap);
                     uploadImage();
-                    Toast.makeText(EditProfileActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
                     name.setText("");
                     confirmPassword.setText("");
@@ -204,7 +203,7 @@ public class EditProfileActivity extends AppCompatActivity {
             });
         }
         else {
-
+            Toast.makeText(EditProfileActivity.this, "Profile Uploaded", Toast.LENGTH_SHORT).show();
         }
 
     }

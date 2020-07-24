@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ImageView profileImage;
-    TextView name;
+    TextView name,followers,following ;
     Intent intent;
     ViewPager viewPager;
 
@@ -42,11 +42,12 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         tabLayout=findViewById(R.id.tab_layout);
         viewPager=findViewById(R.id.view_pager);
+        followers= findViewById(R.id.profileFollowers);
+        following= findViewById(R.id.profileFollowing);
         intent = getIntent();
         String UserID  = intent.getStringExtra("UID");
 
         profileImage = findViewById(R.id.profileImage);
-        name = findViewById(R.id.profileUsername);
 //        ProfileHomeFragment profileHomeFragment = new ProfileHomeFragment();
 //        profileHomeFragment.getUserID(UserID);
 //        getSupportFragmentManager().beginTransaction().add(R.id.frame123,profileHomeFragment).commit();
@@ -62,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-//                name.setText(user.getFullname());
+                name.setText(user.getFullname());
                  if (user.getProfileImage().equals("Default"))
                 {
                     profileImage.setImageResource(R.drawable.male);
@@ -71,6 +72,49 @@ public class ProfileActivity extends AppCompatActivity {
                 {
                     Glide.with(getApplicationContext()).load(user.getProfileImage()).into(profileImage);
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Follow").child(UserID).child("Following");
+        reference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists())
+                {
+                    following.setText(dataSnapshot.getChildrenCount()+"");
+                }
+                else
+                {
+                    following.setText("0");
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Follow").child(UserID).child("Followers");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    followers.setText(dataSnapshot.getChildrenCount()+"");
+                }
+                else
+                {
+                    followers.setText("0");
+                }
+
+
             }
 
             @Override
