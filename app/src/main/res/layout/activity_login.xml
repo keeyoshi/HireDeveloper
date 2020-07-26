@@ -18,7 +18,7 @@
 
     <EditText
         android:id="@+id/etemail"
-        android:hint=" email"
+        android:text="koc@gmail.com"
         android:textColorHint="#000000"
         android:textColor="#000"
         android:background="@drawable/input_design"
@@ -31,6 +31,7 @@
     <EditText
         android:id="@+id/etpassword"
         android:hint=" Password"
+        android:text="password"
         android:textColorHint="#000000"
         android:textColor="#000"
         android:background="@drawable/input_design"

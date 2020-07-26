@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_design"
-        android:hint="  Country"
+        android:hint="Country"
         android:layout_margin="6dp"
         android:textAllCaps="true"
         android:textStyle="bold"
