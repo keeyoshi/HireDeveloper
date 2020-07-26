@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         firebaseAuth = FirebaseAuth.getInstance();
         username = findViewById(R.id.country);
         progressBar= findViewById(R.id.progressbar);
@@ -50,31 +52,55 @@ public class RegisterActivity extends AppCompatActivity {
                 final String emailAddress = email.getText().toString();
                 final String  number= phoneNumber.getText().toString();
                 final String image = "Default";
-                firebaseAuth.createUserWithEmailAndPassword(emailAddress,pass)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if( task.isSuccessful())
-                                {
-                                    User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(),name,number,workP,userName,emailAddress,pass,image);
-                                    FirebaseDatabase.getInstance().getReference("Users")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(user);
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                                    startActivity(intent);
+
+                if(TextUtils.isEmpty(name)){
+                    Toast.makeText(RegisterActivity.this, "Please write your name....", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(TextUtils.isEmpty(userName)){
+                    Toast.makeText(RegisterActivity.this, "Please write your country name..... ", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(TextUtils.isEmpty(number)){
+                    Toast.makeText(RegisterActivity.this, "Please write your Phone Number ", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(TextUtils.isEmpty(workP)){
+                    Toast.makeText(RegisterActivity.this, "Please write your Work place......", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(TextUtils.isEmpty(emailAddress)){
+                    Toast.makeText(RegisterActivity.this, "Please write your Email Address.... ", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(TextUtils.isEmpty(pass)){
+                    Toast.makeText(RegisterActivity.this, "Please write your Password.... ", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    firebaseAuth.createUserWithEmailAndPassword(emailAddress, pass)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(), name, number, workP, userName, emailAddress, pass, image);
+                                        FirebaseDatabase.getInstance().getReference("Users")
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .setValue(user);
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
-                                else
-                                {
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
 
 
-                        });
+                            });
+                }
             }
         });
     }

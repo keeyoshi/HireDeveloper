@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,40 +30,52 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_login);
+
         progressBar= findViewById(R.id.progressbar);
         etusername = findViewById(R.id.etemail);
         etpassword = findViewById(R.id.etpassword);
         btnLogin = findViewById(R.id.btnLogin);
+
         btnCreateNewAccount = findViewById(R.id.btncreateNewUser);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 progressBar.setVisibility(View.VISIBLE);
                 String email = etusername.getText().toString();
                 String password = etpassword.getText().toString();
-                firebaseAuth.signInWithEmailAndPassword(email,password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful())
-                                {
-                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    progressBar.setVisibility(View.GONE);
-                                    finish();
 
+                if(TextUtils.isEmpty(email)){
+                    Toast.makeText(LoginActivity.this, "Please enter your Email address...", Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(password)){
+                    Toast.makeText(LoginActivity.this, "Please enter your Password", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    firebaseAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        progressBar.setVisibility(View.GONE);
+                                        finish();
+
+                                    } else {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                                        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                                        vibrator.vibrate(500);
+                                    }
                                 }
-                                else {
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                                    Vibrator vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
-                                    vibrator.vibrate(500);
-                                }
-                            }
-                        });
+                            });
+                }
             }
         });
+
         btnCreateNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
