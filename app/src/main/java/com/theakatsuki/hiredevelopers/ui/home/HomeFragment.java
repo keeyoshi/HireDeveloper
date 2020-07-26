@@ -1,9 +1,12 @@
 package com.theakatsuki.hiredevelopers.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,18 +26,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.theakatsuki.hiredevelopers.Activity.AddEventActivity;
 import com.theakatsuki.hiredevelopers.Adapter.HomeAdapter;
 import com.theakatsuki.hiredevelopers.Model.Events;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
+import com.theakatsuki.hiredevelopers.ui.dashboard.DashboardFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
 
 
     RecyclerView recyclerView;
+
+    EditText SearchBar;
+    ImageView Message;
+    CircleImageView ProfileImage;
 
     List<Events> events;
     DatabaseReference reference;
@@ -54,6 +65,7 @@ public class HomeFragment extends Fragment {
         events = new ArrayList<>();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         progressBar = root.findViewById(R.id.progressbarRecycleView);
+
         readEvents();
         return root;
     }
