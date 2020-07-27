@@ -9,11 +9,20 @@ public class User {
     String email;
     String password;
     String profileImage;
+    String Status;
 
 
     public User() {
     }
 
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
 
     public User(String id, String fullname, String phoneNumber, String work, String country, String email, String password, String profileImage) {
         this.id = id;
