@@ -22,9 +22,10 @@ import com.theakatsuki.hiredevelopers.R;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText username, password,fullname,phoneNumber, email,work;
-    Button btnRegister;
+    Button btnRegister, LoginButton;
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,15 @@ public class RegisterActivity extends AppCompatActivity {
         work = findViewById(R.id.workPlace);
         phoneNumber = findViewById(R.id.phonenumber);
         btnRegister = findViewById(R.id.register);
+        LoginButton=findViewById(R.id.login);
+
+        LoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,27 +64,49 @@ public class RegisterActivity extends AppCompatActivity {
                 final String image = "Default";
 
                 if(TextUtils.isEmpty(name)){
-                    Toast.makeText(RegisterActivity.this, "Please write your name....", Toast.LENGTH_SHORT).show();
+                    fullname.setError("Full Name not Entered");
+                    fullname.requestFocus();
                 }
 
                 else if(TextUtils.isEmpty(userName)){
-                    Toast.makeText(RegisterActivity.this, "Please write your country name..... ", Toast.LENGTH_SHORT).show();
+                    username.setError("Country not Entered");
+                    username.requestFocus();
                 }
 
                 else if(TextUtils.isEmpty(number)){
-                    Toast.makeText(RegisterActivity.this, "Please write your Phone Number ", Toast.LENGTH_SHORT).show();
+                    phoneNumber.setError("Phone Number not Entered");
+                    phoneNumber.requestFocus();
+                }
+
+                else if(number.length()<10){
+                    phoneNumber.setError("Please enter 10 digit phone Number");
+                    phoneNumber.requestFocus();
                 }
 
                 else if(TextUtils.isEmpty(workP)){
-                    Toast.makeText(RegisterActivity.this, "Please write your Work place......", Toast.LENGTH_SHORT).show();
+                    work.setError("Work Place not Entered");
+                    work.requestFocus();
+                }
+
+
+                else if(!emailAddress.matches(emailPattern)){
+                    email.setError("Email format incorrect");
+                    email.requestFocus();
                 }
 
                 else if(TextUtils.isEmpty(emailAddress)){
-                    Toast.makeText(RegisterActivity.this, "Please write your Email Address.... ", Toast.LENGTH_SHORT).show();
+                    email.setError("Email Address not Entered");
+                    email.requestFocus();
                 }
 
                 else if(TextUtils.isEmpty(pass)){
-                    Toast.makeText(RegisterActivity.this, "Please write your Password.... ", Toast.LENGTH_SHORT).show();
+                    password.setError("Password not Entered");
+                    password.requestFocus();
+                }
+
+                else if(pass.length()<8){
+                    password.setError("Password at least 8 characters");
+                    password.requestFocus();
                 }
 
                 else {

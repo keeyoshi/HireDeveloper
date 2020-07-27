@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin,btnCreateNewAccount;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         progressBar= findViewById(R.id.progressbar);
         etusername = findViewById(R.id.etemail);
         etpassword = findViewById(R.id.etpassword);
-        etusername.setText("Ninzenlama21@gmail.com");
+        etusername.setText("koc@gmail.com");
         etpassword.setText("password");
         btnLogin = findViewById(R.id.btnLogin);
 
@@ -48,11 +49,18 @@ public class LoginActivity extends AppCompatActivity {
                 String password = etpassword.getText().toString();
 
                 if(TextUtils.isEmpty(email)){
-                    Toast.makeText(LoginActivity.this, "Please enter your Email address...", Toast.LENGTH_SHORT).show();
-                }
+                    etusername.setError("Email Not entered");
+                    etusername.requestFocus();
+                 }
                 else if(TextUtils.isEmpty(password)){
-                    Toast.makeText(LoginActivity.this, "Please enter your Password", Toast.LENGTH_SHORT).show();
+                    etpassword.setError("Password not Entered");
+                    etpassword.requestFocus();
+                 }
+                else if(!email.matches(emailPattern)){
+                    etusername.setError("Email format incorrect");
+                    etusername.requestFocus();
                 }
+
                 else {
 
                     firebaseAuth.signInWithEmailAndPassword(email, password)
