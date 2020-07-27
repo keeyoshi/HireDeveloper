@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp"
+    android:layout_marginBottom="25dp"
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -22,39 +21,13 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/btnFollow"
-        android:text="@string/Follow"
-        android:textSize="15dp"
-        android:layout_marginLeft="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_toRightOf="@id/proUsername"
-        android:background="#FAFAFA"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"/>
-    <TextView
 
-        android:id="@+id/followersNumber"
-        android:text="22"
-        android:layout_below="@id/proUsername"
-        android:layout_toRightOf="@id/userProfileImage"
-        android:layout_marginLeft="15dp"
-        android:textSize="12dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="@string/title_followers"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/proUsername"
-        android:textSize="12dp"
-        android:layout_toRightOf="@id/followersNumber"
-        android:layout_marginLeft="5dp"
-        android:layout_height="wrap_content"/>
+
     <TextView
         android:id="@+id/countryName"
         android:text="Nepal"
         android:layout_width="wrap_content"
-        android:layout_below="@id/followersNumber"
+        android:layout_below="@id/proUsername"
         android:textSize="12dp"
         android:layout_toRightOf="@id/userProfileImage"
         android:layout_marginLeft="15dp"
@@ -80,8 +53,9 @@
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:paddingTop="10dp"
-    android:paddingBottom="15dp"
+    android:layout_marginTop="10dp"
+    android:background="#FAFAFA"
+    android:layout_marginBottom="25dp"
     android:layout_below="@id/ContentImage"
     android:layout_height="wrap_content">
 

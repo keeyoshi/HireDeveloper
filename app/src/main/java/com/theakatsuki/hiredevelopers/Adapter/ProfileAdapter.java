@@ -26,13 +26,13 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
 
     private Context myContext;
     private List<Events> events;
     private String uid;
 
-    public HomeAdapter(Context myContext, List<Events> events, String uid) {
+    public ProfileAdapter(Context myContext, List<Events> events, String uid) {
         this.myContext = myContext;
         this.events = events;
         this.uid = uid;
@@ -40,18 +40,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
 
     @NonNull
     @Override
-    public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(myContext).inflate(R.layout.user_display,parent,false);
-        return new Viewholder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(myContext).inflate(R.layout.event_display,parent,false);
+        return new ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
        final Events event = events.get(position);
        holder.content.setText(event.getContent());
-       checkFollowing(event.getUserid(),holder.btnFollow);
        if(event.getEventImage().equals("Blank"))
        {
            holder.imageView.setVisibility(View.GONE);
@@ -99,27 +98,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
 
            }
        });
-       holder.btnFollow.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               holder.btnFollow.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View view) {
-                       if (holder.btnFollow.getText().equals("Follow"))
-                       {
-                           FirebaseDatabase.getInstance().getReference("Follow").child(uid).child("Following").child(event.getUserid()).setValue(true);
-                           FirebaseDatabase.getInstance().getReference("Follow").child(event.getUserid()).child("Followers").child(uid).setValue(true);
-                       }
-                       else
-                       {
-                           FirebaseDatabase.getInstance().getReference("Follow").child(uid).child("Following").child(event.getUserid()).removeValue();
-                           FirebaseDatabase.getInstance().getReference("Follow").child(event.getUserid()).child("Followers").child(uid).removeValue();
-                       }
 
-                   }
-               });
-           }
-       });
 
     }
 
@@ -128,19 +107,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
         return events.size();
     }
 
-    public static class Viewholder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         CircleImageView userProfileImage;
-        public static String follow = "Follow";
-        public static String following = "Following";
 
         ImageView imageView;
-        TextView btnFollow;
         TextView fullName, content, followers, country;
         ImageView like , comment;
 
 
-        public Viewholder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userProfileImage = itemView.findViewById(R.id.userProfileImage);
             imageView = itemView.findViewById(R.id.ContentImage);
@@ -148,31 +124,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
             country = itemView.findViewById(R.id.countryName);
             content = itemView.findViewById(R.id.eventContent);
             like = itemView.findViewById(R.id.btnComment);
-            btnFollow = itemView.findViewById(R.id.btnFollow);
             comment = itemView.findViewById(R.id.btnLike);
         }
     }
-    private void checkFollowing(final String userID, final TextView textView)
-    {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow").child(uid).child("Following");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(userID).exists())
-                {
-                    textView.setText("Following");
-                }
-                else {
-                    textView.setText("Follow");
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 
 
 }

@@ -5,10 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:background="#82ACF6"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="38dp"
+            android:layout_marginTop="3dp"
+            android:id="@+id/MainProfileImage"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/male"
+            android:layout_height="38dp"/>
+        <EditText
+            android:background="@color/colorWhite"
+            android:id="@+id/TVSearch"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Search"
+            android:layout_marginLeft="12dp"
+            android:textSize="15dp"
+            android:layout_toRightOf="@id/MainProfileImage"
+            android:layout_width="280dp"
+            android:layout_height="35dp"/>
+        <ImageView
+            android:id="@+id/IVMessage"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/ic_baseline_message_24"
+            android:layout_width="38dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="38dp"/>
+    </RelativeLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
@@ -18,12 +57,14 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <fragment
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintBottom_toTopOf="@id/relativeLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"

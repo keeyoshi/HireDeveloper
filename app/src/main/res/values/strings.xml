@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">HireDevelopers</string>
     <string name="title_home">Home</string>
-    <string name="title_browse">Browse</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_my_network">My network</string>
+    <string name="title_post">Post</string>
     <string name="title_notifications">Notification</string>
     <string name="title_development">Development</string>
     <string name="title_register">Register user</string>

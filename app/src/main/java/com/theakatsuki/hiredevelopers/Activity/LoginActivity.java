@@ -34,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         progressBar= findViewById(R.id.progressbar);
         etusername = findViewById(R.id.etemail);
         etpassword = findViewById(R.id.etpassword);
+        etusername.setText("Ninzenlama21@gmail.com");
+        etpassword.setText("password");
         btnLogin = findViewById(R.id.btnLogin);
 
         btnCreateNewAccount = findViewById(R.id.btncreateNewUser);
