@@ -16,4 +16,5 @@
     <string name="add_event_hint">What is on your mind? </string>
     <string name="confirmPassword">Confirm password </string>
     <string name="editProfile">Edit profile </string>
+
 </resources>

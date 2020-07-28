@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -21,11 +23,13 @@ import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText username, password,fullname,phoneNumber, email,work;
+    EditText password,fullname,phoneNumber, email,work;
     Button btnRegister, LoginButton;
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
+    AutoCompleteTextView username;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    private String[] countryName={"Nepal","USA"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,10 @@ public class RegisterActivity extends AppCompatActivity {
         phoneNumber = findViewById(R.id.phonenumber);
         btnRegister = findViewById(R.id.register);
         LoginButton=findViewById(R.id.login);
+
+        ArrayAdapter<String> stringArrayAdapter=new ArrayAdapter<>(this,android.R.layout.select_dialog_item,countryName);
+        username.setAdapter(stringArrayAdapter);
+        username.setThreshold(1);
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override

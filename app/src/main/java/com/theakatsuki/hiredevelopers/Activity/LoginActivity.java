@@ -63,6 +63,11 @@ public class LoginActivity extends AppCompatActivity {
                     etusername.requestFocus();
                 }
 
+                else if(etpassword.length()<8){
+                    etpassword.setError("Password length at least 8 characters");
+                    etpassword.requestFocus();
+                }
+
                 else {
 
                     firebaseAuth.signInWithEmailAndPassword(email, password)
