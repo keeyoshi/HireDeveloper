@@ -87,17 +87,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
            }
        });
-       holder.userProfileImage.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-
-               Intent intent = new Intent(myContext, ProfileActivity.class);
-               intent.putExtra("UID",event.getUserid());
-               myContext.startActivity(intent);
-
-
-           }
-       });
 
 
     }

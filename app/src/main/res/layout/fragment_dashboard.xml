@@ -7,32 +7,16 @@
     android:orientation="vertical"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <AutoCompleteTextView
-        android:id="@+id/editMobileNo"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/search_bar"
-        android:ems="10"
-        android:hint="Find your Jobs"
-        android:textColor="#000"
-        android:textColorHint="#000"
-        android:drawableLeft="@drawable/ic_baseline_search_24"
-        android:gravity="center"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Popular Profile"
-        android:background="@drawable/horizontal_line"
-        android:textSize="24dp"
-        android:layout_marginTop="6dp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:layout_margin="8dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="10dp"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:background="#7EBCA3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

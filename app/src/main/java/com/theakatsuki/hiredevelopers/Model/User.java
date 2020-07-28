@@ -9,13 +9,22 @@ public class User {
     String email;
     String password;
     String profileImage;
+    String status;
 
 
     public User() {
     }
 
 
-    public User(String id, String fullname, String phoneNumber, String work, String country, String email, String password, String profileImage) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public User(String id, String fullname, String phoneNumber, String work, String country, String email, String password, String profileImage, String status) {
         this.id = id;
         this.fullname = fullname;
         this.phoneNumber = phoneNumber;
@@ -24,6 +33,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.profileImage = profileImage;
+        this.status = status;
     }
 
     public String getId() {
