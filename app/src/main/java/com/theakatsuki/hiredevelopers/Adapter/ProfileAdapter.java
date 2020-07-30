@@ -62,7 +62,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
            holder.userProfileImage.setImageResource(R.mipmap.ic_launcher);
 
        }
-       DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(event.getUserid());
+       DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(event.getUserId());
        reference.addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -107,13 +107,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            userProfileImage = itemView.findViewById(R.id.userProfileImage);
-            imageView = itemView.findViewById(R.id.ContentImage);
-            fullName = itemView.findViewById(R.id.proUsername);
-            country = itemView.findViewById(R.id.countryName);
-            content = itemView.findViewById(R.id.eventContent);
-            like = itemView.findViewById(R.id.btnComment);
-            comment = itemView.findViewById(R.id.btnLike);
+            userProfileImage = itemView.findViewById(R.id.userProfileImage1);
+            imageView = itemView.findViewById(R.id.ContentImage1);
+            fullName = itemView.findViewById(R.id.proUsername1);
+            country = itemView.findViewById(R.id.countryName1);
+            content = itemView.findViewById(R.id.eventContent1);
+            like = itemView.findViewById(R.id.btnComment1);
+            comment = itemView.findViewById(R.id.btnLike1);
         }
     }
 

@@ -24,12 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="30dp"
-                    android:id="@+id/add_profile_image"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_height="30dp"/>
+
 
                 <TextView
                     android:id="@+id/add_event_username"
@@ -40,7 +35,6 @@
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/add_profile_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

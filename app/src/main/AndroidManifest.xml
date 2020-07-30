@@ -19,7 +19,6 @@
         <activity android:name=".Activity.ProfileActivity" />
         <activity android:name=".Activity.MessageActivity"/>
         <activity android:name=".Activity.EditProfileActivity" />
-        <activity android:name=".Activity.AddEventActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

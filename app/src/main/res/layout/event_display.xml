@@ -7,15 +7,15 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/userProfileImage"
+        android:id="@+id/userProfileImage1"
         android:src="@drawable/hiredeveloper"
         android:layout_width="60dp"
         android:layout_marginLeft="20dp"
         android:layout_height="60dp"/>
     <TextView
-        android:id="@+id/proUsername"
+        android:id="@+id/proUsername1"
         android:text="Ninjeng lama "
-        android:layout_toRightOf="@+id/userProfileImage"
+        android:layout_toRightOf="@+id/userProfileImage1"
         android:layout_marginLeft="15dp"
         android:textSize="16dp"
         android:textStyle="bold"
@@ -24,30 +24,35 @@
 
 
     <TextView
-        android:id="@+id/countryName"
+        android:id="@+id/countryName1"
         android:text="Nepal"
         android:layout_width="wrap_content"
-        android:layout_below="@id/proUsername"
+        android:layout_below="@id/proUsername1"
         android:textSize="12dp"
-        android:layout_toRightOf="@id/userProfileImage"
+        android:layout_toRightOf="@id/userProfileImage1"
         android:layout_marginLeft="15dp"
         android:layout_height="wrap_content"/>
     <TextView
-        android:id="@+id/eventContent"
+        android:id="@+id/eventContent1"
         android:layout_marginTop="10dp"
         android:text="@string/title_content"
         android:layout_width="match_parent"
-        android:layout_below="@id/userProfileImage"
+        android:layout_below="@id/userProfileImage1"
         android:textSize="14dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_height="wrap_content"/>
     <ImageView
-        android:id="@+id/ContentImage"
+        android:id="@+id/ContentImage1"
         android:src="@drawable/welcome"
         android:layout_marginTop="10dp"
         android:visibility="visible"
-        android:layout_below="@id/eventContent"
+        android:layout_below="@id/eventContent1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/likeCountText"
+        android:layout_below="@id/ContentImage1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -56,7 +61,7 @@
     android:layout_marginTop="10dp"
     android:background="#FAFAFA"
     android:layout_marginBottom="25dp"
-    android:layout_below="@id/ContentImage"
+    android:layout_below="@id/likeCountText"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -65,27 +70,29 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/likeLayout"
             android:layout_width="200dp"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/btnLike"
+                android:id="@+id/btnLike1"
                 android:layout_width="30dp"
-                android:src="@drawable/ic_baseline_hot_24"
+                android:src="@drawable/ic_baseline_thumb_up_24"
                 android:layout_height="30dp"/>
             <TextView
-                android:text="Hot"
+                android:text="Like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/commentLayout"
             android:layout_width="200dp"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/btnComment"
+                android:id="@+id/btnComment1"
                 android:layout_width="30dp"
                 android:src="@drawable/ic_baseline_comment_24"
                 android:layout_height="30dp"/>
