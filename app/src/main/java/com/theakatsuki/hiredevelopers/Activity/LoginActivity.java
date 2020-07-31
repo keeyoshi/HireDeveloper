@@ -3,14 +3,20 @@ package com.theakatsuki.hiredevelopers.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,12 +25,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.theakatsuki.hiredevelopers.R;
 
+import io.paperdb.Paper;
+
 public class LoginActivity extends AppCompatActivity {
     EditText etusername, etpassword;
-    Button btnLogin,btnCreateNewAccount;
+    Button btnLogin;
+    TextView btnCreateNewAccount;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
+    TextView resetPassword;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    private CheckBox showPassword;
+    ProgressDialog loadingbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +52,38 @@ public class LoginActivity extends AppCompatActivity {
         etusername.setText("koc@gmail.com");
         etpassword.setText("password");
         btnLogin = findViewById(R.id.btnLogin);
+        resetPassword=findViewById(R.id.forgot_password_text);
 
-        btnCreateNewAccount = findViewById(R.id.btncreateNewUser);
+        loadingbar=new ProgressDialog(this);
+
+        showPassword=findViewById(R.id.show_password);
+        showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(!b){
+                    etpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+                }
+                else{
+                    etpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+                }
+            }
+        });
+
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(LoginActivity.this,PasswordResetActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCreateNewAccount = findViewById(R.id.createAccount);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                progressBar.setVisibility(View.VISIBLE);
                 String email = etusername.getText().toString();
                 String password = etpassword.getText().toString();
 
@@ -69,26 +106,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 else {
+                    loadingbar.setTitle("Login Account");
+                    loadingbar.setMessage("Please wait.. Checking Credential...");
+                    loadingbar.setCanceledOnTouchOutside(false);
+                    loadingbar.show();
 
-                    firebaseAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
-                                        progressBar.setVisibility(View.GONE);
-                                        finish();
+                    loginUser(email,password);
 
-                                    } else {
-                                        progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                                        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                                        vibrator.vibrate(500);
-                                    }
-                                }
-                            });
                 }
             }
         });
@@ -101,5 +125,28 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void loginUser(String email, String password) {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            loadingbar.dismiss();
+
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+
+                        } else {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                            vibrator.vibrate(500);
+                        }
+                    }
+                });
     }
 }

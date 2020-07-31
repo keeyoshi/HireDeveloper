@@ -12,6 +12,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,15 +22,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
+import com.theakatsuki.hiredevelopers.common.Common;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText password,fullname,phoneNumber, email,work;
-    Button btnRegister, LoginButton;
+    Button btnRegister;
+    TextView LoginButton;
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
     AutoCompleteTextView username;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    private String[] countryName={"Nepal","USA"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.register);
         LoginButton=findViewById(R.id.login);
 
-        ArrayAdapter<String> stringArrayAdapter=new ArrayAdapter<>(this,android.R.layout.select_dialog_item,countryName);
+        ArrayAdapter<String> stringArrayAdapter=new ArrayAdapter<>(this,android.R.layout.select_dialog_item, Common.countryName);
         username.setAdapter(stringArrayAdapter);
         username.setThreshold(1);
 

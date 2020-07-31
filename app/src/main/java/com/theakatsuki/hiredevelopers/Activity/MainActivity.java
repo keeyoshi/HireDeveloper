@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     CircleImageView circleImageView;
     EditText searchBar;
-    ImageView messageImage;
+    ImageView SettingImage;
     FirebaseUser firebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         circleImageView = findViewById(R.id.MainProfileImage);
         searchBar = findViewById(R.id.TVSearch);
-        messageImage = findViewById(R.id.IVMessage);
+        SettingImage = findViewById(R.id.img_Setting);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
@@ -80,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
                 intent.putExtra("UID",firebaseUser.getUid());
                 startActivity(intent);
+            }
+        });
+
+        SettingImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),SettingActivity.class);
+                intent.putExtra("UID",firebaseUser.getUid());
+                startActivity(intent);;
             }
         });
 
