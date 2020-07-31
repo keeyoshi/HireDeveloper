@@ -181,7 +181,7 @@ public class ProfileActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot1 :dataSnapshot.getChildren())
                 {
                     Events event = dataSnapshot1.getValue(Events.class);
-                    if(event.getUserid().equals(userId))
+                    if(event.getUserId().equals(userId))
                     {
                         events.add(event);
                     }

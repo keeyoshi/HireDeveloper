@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
     private Context myContext;
     private List<Events> events;
     private String uid;
+    boolean like = false;
+    FirebaseUser firebaseUser;
 
     public HomeAdapter(Context myContext, List<Events> events, String uid) {
         this.myContext = myContext;
@@ -48,10 +52,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull final Viewholder holder, int position) {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
        final Events event = events.get(position);
        holder.content.setText(event.getContent());
-       checkFollowing(event.getUserid(),holder.btnFollow);
+       checkFollowing(event.getUserId(),holder.btnFollow);
+       CheckLike(event.getPostId(),holder.like);
+
        if(event.getEventImage().equals("Blank"))
        {
            holder.imageView.setVisibility(View.GONE);
@@ -63,7 +70,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
            holder.userProfileImage.setImageResource(R.mipmap.ic_launcher);
 
        }
-       DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(event.getUserid());
+       DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(event.getUserId());
        reference.addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,7 +100,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
            public void onClick(View view) {
 
                Intent intent = new Intent(myContext, ProfileActivity.class);
-               intent.putExtra("UID",event.getUserid());
+               intent.putExtra("UID",event.getUserId());
                myContext.startActivity(intent);
 
 
@@ -107,17 +114,31 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
                    public void onClick(View view) {
                        if (holder.btnFollow.getText().equals("Follow"))
                        {
-                           FirebaseDatabase.getInstance().getReference("Follow").child(uid).child("Following").child(event.getUserid()).setValue(true);
-                           FirebaseDatabase.getInstance().getReference("Follow").child(event.getUserid()).child("Followers").child(uid).setValue(true);
+                           FirebaseDatabase.getInstance().getReference("Follow").child(uid).child("Following").child(event.getUserId()).setValue(true);
+                           FirebaseDatabase.getInstance().getReference("Follow").child(event.getUserId()).child("Followers").child(uid).setValue(true);
                        }
                        else
                        {
-                           FirebaseDatabase.getInstance().getReference("Follow").child(uid).child("Following").child(event.getUserid()).removeValue();
-                           FirebaseDatabase.getInstance().getReference("Follow").child(event.getUserid()).child("Followers").child(uid).removeValue();
+                           FirebaseDatabase.getInstance().getReference("Follow").child(uid).child("Following").child(event.getUserId()).removeValue();
+                           FirebaseDatabase.getInstance().getReference("Follow").child(event.getUserId()).child("Followers").child(uid).removeValue();
                        }
 
                    }
                });
+           }
+       });
+       holder.like.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+                if(holder.like.getTag().equals("Like"))
+                {
+                    FirebaseDatabase.getInstance().getReference("Activities").child(event.getPostId()).child("Like").child(firebaseUser.getUid()).setValue(true);
+
+                }
+                else if (holder.like.getTag().equals("Liked"))
+                {
+                    FirebaseDatabase.getInstance().getReference("Activities").child(event.getPostId()).child("Like").child(firebaseUser.getUid()).removeValue();
+                }
            }
        });
 
@@ -131,12 +152,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
     public static class Viewholder extends RecyclerView.ViewHolder{
 
         CircleImageView userProfileImage;
-        public static String follow = "Follow";
-        public static String following = "Following";
 
         ImageView imageView;
         TextView btnFollow;
-        TextView fullName, content, followers, country;
+        TextView fullName, content, followers, country ,likeText;
         ImageView like , comment;
 
 
@@ -147,9 +166,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
             fullName = itemView.findViewById(R.id.proUsername);
             country = itemView.findViewById(R.id.countryName);
             content = itemView.findViewById(R.id.eventContent);
-            like = itemView.findViewById(R.id.btnComment);
+            like = itemView.findViewById(R.id.btnLike);
             btnFollow = itemView.findViewById(R.id.btnFollow);
-            comment = itemView.findViewById(R.id.btnLike);
+            comment = itemView.findViewById(R.id.btnComment);
+            likeText = itemView.findViewById(R.id.likeCountText);
         }
     }
     private void checkFollowing(final String userID, final TextView textView)
@@ -173,6 +193,31 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
             }
         });
     }
+    private void CheckLike(final String eventId, final ImageView imageView  )
+    {
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Activities").child(eventId).child("Like");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                if (dataSnapshot.child(firebaseUser.getUid()).exists())
+                {
+                    imageView.setImageResource(R.drawable.ic_baseline_blue0thumb_up_24);
+                    imageView.setTag("Liked");
+                }
+                else {
+                    imageView.setImageResource(R.drawable.ic_baseline_thumb_up_24);
+                    imageView.setTag("Like");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }
