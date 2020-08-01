@@ -2,6 +2,7 @@ package com.theakatsuki.hiredevelopers.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,7 @@ import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -187,6 +189,7 @@ public class ProfileActivity extends AppCompatActivity {
                     }
 
                 }
+                Collections.reverse(events);
                 post.setText(events.size()+"");
                 profileAdapter = new ProfileAdapter(getApplicationContext(),events,firebaseUser.getUid());
                 recyclerView.setAdapter(profileAdapter);

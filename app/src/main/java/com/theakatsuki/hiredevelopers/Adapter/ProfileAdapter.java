@@ -12,11 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.theakatsuki.hiredevelopers.Activity.CommentActivity;
 import com.theakatsuki.hiredevelopers.Activity.ProfileActivity;
 import com.theakatsuki.hiredevelopers.Model.Events;
 import com.theakatsuki.hiredevelopers.Model.User;
@@ -31,6 +34,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     private Context myContext;
     private List<Events> events;
     private String uid;
+    FirebaseUser firebaseUser;
 
     public ProfileAdapter(Context myContext, List<Events> events, String uid) {
         this.myContext = myContext;
@@ -48,6 +52,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
        final Events event = events.get(position);
        holder.content.setText(event.getContent());
@@ -87,7 +93,30 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
            }
        });
+        CheckLike(event.getPostId(),holder.like);
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.like.getTag().equals("Like"))
+                {
+                    FirebaseDatabase.getInstance().getReference("Activities").child(event.getPostId()).child("Like").child(firebaseUser.getUid()).setValue(true);
 
+                }
+                else if (holder.like.getTag().equals("Liked"))
+                {
+                    FirebaseDatabase.getInstance().getReference("Activities").child(event.getPostId()).child("Like").child(firebaseUser.getUid()).removeValue();
+                }
+            }
+        });
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(myContext, CommentActivity.class);
+                intent.putExtra("PostId",event.getPostId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                myContext.startActivity(intent);
+            }
+        });
 
     }
 
@@ -112,11 +141,36 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             fullName = itemView.findViewById(R.id.proUsername1);
             country = itemView.findViewById(R.id.countryName1);
             content = itemView.findViewById(R.id.eventContent1);
-            like = itemView.findViewById(R.id.btnComment1);
-            comment = itemView.findViewById(R.id.btnLike1);
+            like = itemView.findViewById(R.id.btnLike1);
+            comment = itemView.findViewById(R.id.btnComment1);
         }
     }
 
+    private void CheckLike(final String eventId, final ImageView imageView  )
+    {
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Activities").child(eventId).child("Like");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                if (dataSnapshot.child(firebaseUser.getUid()).exists())
+                {
+                    imageView.setImageResource(R.drawable.ic_baseline_blue0thumb_up_24);
+                    imageView.setTag("Liked");
+                }
+                else {
+                    imageView.setImageResource(R.drawable.ic_baseline_thumb_up_24);
+                    imageView.setTag("Like");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }
