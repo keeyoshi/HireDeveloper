@@ -35,9 +35,9 @@
             android:layout_width="280dp"
             android:layout_height="35dp"/>
         <ImageView
-            android:id="@+id/IVMessage"
+            android:id="@+id/img_Setting"
             android:layout_marginTop="3dp"
-            android:src="@drawable/ic_baseline_message_24"
+            android:src="@drawable/ic_baseline_settings_24"
             android:layout_width="38dp"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
