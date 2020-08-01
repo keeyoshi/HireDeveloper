@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,20 +7,37 @@
     android:orientation="vertical"
     tools:context=".ui.notifications.NotificationsFragment">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:text="Recent"
-        android:textColor="#FFF"
-        android:textSize="28dp"
-        android:textStyle="bold"
-        android:background="@drawable/horizontal_line"/>
+        android:id="@+id/bar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar_notification"
+            android:background="?android:attr/windowBackground">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Notification"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recycler_notification"
-        android:layout_margin="8dp"/>
-
-</LinearLayout>
+        android:id="@+id/recycle_notification"
+        android:layout_below="@+id/bar"/>
+</RelativeLayout>

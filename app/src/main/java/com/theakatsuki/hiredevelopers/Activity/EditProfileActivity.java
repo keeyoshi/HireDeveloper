@@ -53,6 +53,7 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
         imageView = findViewById(R.id.editProfileImage);
         name = findViewById(R.id.editName);
         country = findViewById(R.id.editCountry);

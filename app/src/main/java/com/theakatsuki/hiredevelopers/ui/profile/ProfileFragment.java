@@ -87,7 +87,9 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-        reference.addValueEventListener(new ValueEventListener() {
+
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        reference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
