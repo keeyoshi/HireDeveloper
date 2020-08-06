@@ -82,7 +82,7 @@ public class MessageActivity extends AppCompatActivity {
         texmessage=findViewById(R.id.sendmessage);
         progressBar = findViewById(R.id.progressBar);
         intent=getIntent();
-        userid = intent.getStringExtra("userid");
+        userid = intent.getStringExtra("userId");
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +99,14 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
-
+        profile_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+                intent.putExtra("UID",userid);
+                startActivity(intent);
+            }
+        });
         storageReference = FirebaseStorage.getInstance().getReference("MessageImages");
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         refrences= FirebaseDatabase.getInstance().getReference("Users").child(userid);
@@ -236,19 +243,20 @@ public class MessageActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("msgSender",sender);
-        hashMap.put("msgReciver",reciver);
+        hashMap.put("msgReceiver",reciver);
         hashMap.put("message",message);
         hashMap.put("type","text");
         reference.child("Chat").push().setValue(hashMap);
-        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
-                .child(reciver);
-        chatRef.addValueEventListener(new ValueEventListener() {
+
+        final DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("ChatList")
+                .child(firebaseUser.getUid())
+                .child(userid);
+        chatRefReceiver.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.exists())
                 {
-                    chatRef.child("id").setValue(sender);
-                    chatRef.child("reciverid").setValue(reciver);
+                    chatRefReceiver.child("id").setValue(userid);
                 }
             }
 
@@ -257,10 +265,7 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-        final DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("Chatlist")
-                .child(sender);
-        chatRefReceiver.child("id").setValue(reciver);
-        chatRefReceiver.child("reciverid").setValue(sender);
+
 
         final String msg = message;
         DatabaseReference notific = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -295,8 +300,8 @@ public class MessageActivity extends AppCompatActivity {
                 chats.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
-                    if(chat.getMsgReciver().equals(userid) && chat.getMsgSender().equals(myid)||
-                    chat.getMsgReciver().equals(myid) && chat.getMsgSender().equals(userid))
+                    if(chat.getMsgReceiver().equals(userid) && chat.getMsgSender().equals(myid)||
+                    chat.getMsgReceiver().equals(myid) && chat.getMsgSender().equals(userid))
                     {
                         chats.add(chat);
                     }

@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.theakatsuki.hiredevelopers.Adapter.UserAdapter;
+import com.theakatsuki.hiredevelopers.Model.Following;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
@@ -30,6 +31,8 @@ public class ActiveUserFragment extends Fragment {
 
     RecyclerView recyclerView;
     List<User> users;
+    List<Following> followingList;
+    FirebaseUser firebaseUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,14 +40,36 @@ public class ActiveUserFragment extends Fragment {
         recyclerView = view.findViewById(R.id.userListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         users = new ArrayList<>();
-        loadUser();
-
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        checkFriends();
         return  view;
     }
+
+    private void checkFriends()
+    {
+        followingList = new ArrayList();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow").child(firebaseUser.getUid()).child("Following");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Following following = snapshot.getValue(Following.class);
+                    followingList.add(following);
+                }
+                loadUser();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void loadUser()
     {
 
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,9 +78,13 @@ public class ActiveUserFragment extends Fragment {
                 for(DataSnapshot snapshot :  dataSnapshot.getChildren())
                 {
                     User user = snapshot.getValue(User.class);
-                    if(!user.getId().equals(firebaseUser.getUid())){
-                        users.add(user);
+                    for (Following following : followingList)
+                    {
+                        if(user.getId().equals(following.getId())){
+                            users.add(user);
+                        }
                     }
+
                 }
                 UserAdapter userAdapter = new UserAdapter(getContext(),users,true);
                 recyclerView.setAdapter(userAdapter);

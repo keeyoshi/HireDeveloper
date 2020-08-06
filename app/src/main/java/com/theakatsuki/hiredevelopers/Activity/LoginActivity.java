@@ -38,21 +38,21 @@ public class LoginActivity extends AppCompatActivity {
     TextView resetPassword;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private CheckBox showPassword;
-    ProgressDialog loadingbar;
+    ProgressDialog loadingBar;
+
     @Override
     protected void onStart() {
         super.onStart();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(firebaseUser!=null) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        if(firebaseUser!=null)
+        {
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
             finish();
+
         }
     }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         resetPassword=findViewById(R.id.forgot_password_text);
 
-        loadingbar=new ProgressDialog(this);
+        loadingBar=new ProgressDialog(this);
 
         showPassword=findViewById(R.id.show_password);
         showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -121,10 +121,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 else {
-                    loadingbar.setTitle("Login Account");
-                    loadingbar.setMessage("Please wait.. Checking Credential...");
-                    loadingbar.setCanceledOnTouchOutside(false);
-                    loadingbar.show();
+                    loadingBar.setTitle("Login Account");
+                    loadingBar.setMessage("Please wait.. "+ "\n"+"Checking Credential...");
+                    loadingBar.setCanceledOnTouchOutside(false);
+                    loadingBar.show();
 
                     loginUser(email,password);
 
@@ -149,9 +149,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            loadingbar.dismiss();
-
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            loadingBar.dismiss();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             finish();
 
@@ -160,8 +159,11 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
                             Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                             vibrator.vibrate(500);
+                            loadingBar.dismiss();
                         }
                     }
                 });
     }
+
+
 }
