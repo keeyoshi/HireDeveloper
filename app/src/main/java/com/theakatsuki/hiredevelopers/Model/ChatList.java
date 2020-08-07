@@ -2,25 +2,11 @@ package com.theakatsuki.hiredevelopers.Model;
 
 public class ChatList {
     String id ;
-    String reciverid;
+    String receiver;
 
-
-    public ChatList(String id, String reciverid) {
+    public ChatList(String id, String receiver) {
         this.id = id;
-        this.reciverid = reciverid;
-    }
-
-
-
-    public String getReciverid() {
-        return reciverid;
-    }
-
-    public void setReciverid(String reciverid) {
-        this.reciverid = reciverid;
-    }
-
-    public ChatList() {
+        this.receiver = receiver;
     }
 
     public String getId() {
@@ -29,5 +15,16 @@ public class ChatList {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public ChatList() {
     }
 }

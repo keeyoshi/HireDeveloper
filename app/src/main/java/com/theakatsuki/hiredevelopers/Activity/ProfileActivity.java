@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.theakatsuki.hiredevelopers.Adapter.HomeAdapter;
 import com.theakatsuki.hiredevelopers.Adapter.ProfileAdapter;
+import com.theakatsuki.hiredevelopers.AllFunctions;
 import com.theakatsuki.hiredevelopers.Model.Events;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
@@ -46,6 +48,8 @@ public class ProfileActivity extends AppCompatActivity {
     List<Events> events;
     FirebaseUser firebaseUser;
     ProfileAdapter profileAdapter;
+    Button btnMessage, btnFollow;
+    LinearLayout linearLayout;
     Button btnEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,9 @@ public class ProfileActivity extends AppCompatActivity {
         about= findViewById(R.id.proAbout);
         recyclerView= findViewById(R.id.proHomeRecyclerView);
         jobRecyclerView= findViewById(R.id.jobRecyclerView);
+        linearLayout = findViewById(R.id.linearL);
+        btnFollow = findViewById(R.id.proBtnFollow);
+        btnMessage = findViewById(R.id.proBtnMessage);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         Intent intent = getIntent();
         userId = intent.getStringExtra("UID");
@@ -72,9 +79,38 @@ public class ProfileActivity extends AppCompatActivity {
         home.setBackgroundColor(getResources().getColor(R.color.clickColor));
         readEvents(userId);
         if (firebaseUser.getUid().equals(userId))
+        {
             btnEdit.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.GONE);
+        }
+
         else
+        {
             btnEdit.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.VISIBLE);
+        }
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AllFunctions allFunctions = new AllFunctions();
+                if (btnFollow.getText().equals("Follow"))
+                {
+                   allFunctions.FollowUser(firebaseUser.getUid(),userId);
+                }
+                else
+                {
+                    allFunctions.RemoveFollow(firebaseUser.getUid(),userId);
+                }
+            }
+        });
+        btnMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+                intent.putExtra("userId",userId);
+                startActivity(intent);
+            }
+        });
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override

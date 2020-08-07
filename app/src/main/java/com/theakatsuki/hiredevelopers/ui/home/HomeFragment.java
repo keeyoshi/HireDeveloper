@@ -23,6 +23,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.theakatsuki.hiredevelopers.Adapter.HomeAdapter;
 import com.theakatsuki.hiredevelopers.Model.Events;
+import com.theakatsuki.hiredevelopers.Model.Following;
 import com.theakatsuki.hiredevelopers.R;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class HomeFragment extends Fragment {
     HomeAdapter homeAdapter;
     private RecyclerView.LayoutManager layoutManager;
     ProgressBar progressBar;
-    
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +62,6 @@ public class HomeFragment extends Fragment {
         readEvents();
         return root;
     }
-
     public void readEvents()
     {
         progressBar.setVisibility(View.VISIBLE);
@@ -76,6 +76,7 @@ public class HomeFragment extends Fragment {
                     Events event = dataSnapshot1.getValue(Events.class);
                     events.add(event);
                     progressBar.setVisibility(View.GONE);
+
                 }
                 Collections.reverse(events);
                 homeAdapter = new HomeAdapter(getContext(),events,firebaseUser.getUid());

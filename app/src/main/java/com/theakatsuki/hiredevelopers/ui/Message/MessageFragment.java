@@ -46,21 +46,15 @@ public class MessageFragment extends Fragment {
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         userList = new ArrayList<ChatList>();
 
-        reference = FirebaseDatabase.getInstance().getReference("Chatlist") ;
+        reference = FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.getUid()) ;
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
                 for(DataSnapshot snapshot :dataSnapshot.getChildren()) {
                     ChatList chatList = snapshot.getValue(ChatList.class);
-                    if(chatList.getReciverid().equals(firebaseUser.getUid()))
-                    {
+                    userList.add(chatList);
 
-                    }
-                    else
-                    {
-                        userList.add(chatList);
-                    }
 
 
                 }
@@ -79,19 +73,24 @@ public class MessageFragment extends Fragment {
 
     private void ReaChat() {
         mUsers = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-        reference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Users");
+        reference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUsers.clear();
-                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
+                {
                     User user = dataSnapshot1.getValue(User.class);
                     for(ChatList chatList: userList) {
-                        if(user.getId().equals(chatList.getReciverid()) ) {
 
+                        if(user.getId().equals(chatList.getId())){
                             mUsers.add(user);
                         }
+
+
                     }
+
+
                 }
                 chatAdapter = new ChatAdapter(getContext(),mUsers ,true);
                 recyclerView.setAdapter(chatAdapter);

@@ -117,8 +117,42 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
                    public void onClick(View view) {
                        if (holder.btnFollow.getText().equals("Follow"))
                        {
-                           FirebaseDatabase.getInstance().getReference("Follow").child(uid).child("Following").child(event.getUserId()).setValue(true);
-                           FirebaseDatabase.getInstance().getReference("Follow").child(event.getUserId()).child("Followers").child(uid).setValue(true);
+                           final DatabaseReference followRef = FirebaseDatabase.getInstance().getReference("Follow")
+                                   .child(firebaseUser.getUid())
+                                   .child("Following")
+                                   .child(event.getUserId());
+                           followRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                               @Override
+                               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                   if(!dataSnapshot.exists())
+                                   {
+                                       followRef.child("id").setValue(event.getUserId());
+                                   }
+                               }
+
+                               @Override
+                               public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                               }
+                           });
+                           final DatabaseReference followRef2 = FirebaseDatabase.getInstance().getReference("Follow")
+                                   .child(event.getUserId())
+                                   .child("Followers")
+                                   .child(firebaseUser.getUid());
+                           followRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+                               @Override
+                               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                   if(!dataSnapshot.exists())
+                                   {
+                                       followRef2.child("id").setValue(firebaseUser.getUid());
+                                   }
+                               }
+
+                               @Override
+                               public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                               }
+                           });
                        }
                        else
                        {
@@ -130,6 +164,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
                });
            }
        });
+
        holder.like.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {

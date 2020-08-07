@@ -2,13 +2,13 @@ package com.theakatsuki.hiredevelopers.Model;
 
 public class Chat {
     private String message;
-    private String msgReciver;
+    private String msgReceiver;
     private String msgSender;
     private String type;
 
-    public Chat(String message, String msgReciver, String msgSender, String type) {
+    public Chat(String message, String msgReceiver, String msgSender, String type) {
         this.message = message;
-        this.msgReciver = msgReciver;
+        this.msgReceiver = msgReceiver;
         this.msgSender = msgSender;
         this.type = type;
     }
@@ -32,12 +32,12 @@ public class Chat {
         this.message = message;
     }
 
-    public String getMsgReciver() {
-        return msgReciver;
+    public String getMsgReceiver() {
+        return msgReceiver;
     }
 
-    public void setMsgReciver(String msgReciver) {
-        this.msgReciver = msgReciver;
+    public void setMsgReceiver(String msgReceiver) {
+        this.msgReceiver = msgReceiver;
     }
 
     public String getMsgSender() {
