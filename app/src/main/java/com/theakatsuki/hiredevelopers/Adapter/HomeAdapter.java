@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.theakatsuki.hiredevelopers.Activity.CommentActivity;
 import com.theakatsuki.hiredevelopers.Activity.ProfileActivity;
 import com.theakatsuki.hiredevelopers.Model.Events;
 import com.theakatsuki.hiredevelopers.Model.User;
@@ -58,6 +59,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
        holder.content.setText(event.getContent());
        checkFollowing(event.getUserId(),holder.btnFollow);
        CheckLike(event.getPostId(),holder.like);
+       readLikes(event.getPostId(),holder.likeText);
+       CountComments(event.getPostId(),holder.commentText);
 
        if(event.getEventImage().equals("Blank"))
        {
@@ -141,6 +144,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
                 }
            }
        });
+       holder.comment.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(myContext, CommentActivity.class);
+               intent.putExtra("PostId",event.getPostId());
+               myContext.startActivity(intent);
+           }
+       });
 
     }
 
@@ -155,7 +166,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
 
         ImageView imageView;
         TextView btnFollow;
-        TextView fullName, content, followers, country ,likeText;
+        TextView fullName, content, commentText, country ,likeText;
         ImageView like , comment;
 
 
@@ -170,6 +181,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
             btnFollow = itemView.findViewById(R.id.btnFollow);
             comment = itemView.findViewById(R.id.btnComment);
             likeText = itemView.findViewById(R.id.likeCountText);
+            commentText = itemView.findViewById(R.id.comment_CountText);
         }
     }
     private void checkFollowing(final String userID, final TextView textView)
@@ -185,6 +197,36 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
                 else {
                     textView.setText("Follow");
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void readLikes(String postId, final TextView likeText)
+    {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Activities").child(postId).child("Like");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                likeText.setText(dataSnapshot.getChildrenCount()+" likes");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void CountComments(String postId, final TextView commentText)
+    {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Activities").child(postId).child("Comment");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                commentText.setText(dataSnapshot.getChildrenCount()+" comments");
             }
 
             @Override

@@ -26,6 +26,7 @@ import com.theakatsuki.hiredevelopers.Model.Events;
 import com.theakatsuki.hiredevelopers.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,9 +36,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
 
-    EditText SearchBar;
-    ImageView Message;
-    CircleImageView ProfileImage;
+
 
     List<Events> events;
     DatabaseReference reference;
@@ -69,8 +68,7 @@ public class HomeFragment extends Fragment {
 
         reference = FirebaseDatabase.getInstance().getReference("Events");
 
-        Query query = reference.orderByChild("count");
-        query.addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
@@ -79,6 +77,7 @@ public class HomeFragment extends Fragment {
                     events.add(event);
                     progressBar.setVisibility(View.GONE);
                 }
+                Collections.reverse(events);
                 homeAdapter = new HomeAdapter(getContext(),events,firebaseUser.getUid());
                 recyclerView.setAdapter(homeAdapter);
             }

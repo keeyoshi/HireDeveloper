@@ -23,9 +23,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.theakatsuki.hiredevelopers.R;
 
-import io.paperdb.Paper;
+
 
 public class LoginActivity extends AppCompatActivity {
     EditText etusername, etpassword;
@@ -33,10 +34,24 @@ public class LoginActivity extends AppCompatActivity {
     TextView btnCreateNewAccount;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
     TextView resetPassword;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private CheckBox showPassword;
     ProgressDialog loadingbar;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(firebaseUser!=null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

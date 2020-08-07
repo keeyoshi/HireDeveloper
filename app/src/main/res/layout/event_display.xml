@@ -71,14 +71,15 @@
 
         <LinearLayout
             android:id="@+id/likeLayout"
-            android:layout_width="200dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
             <ImageView
                 android:id="@+id/btnLike1"
                 android:layout_width="30dp"
-                android:src="@drawable/ic_baseline_thumb_up_24"
+                android:src="@drawable/ic_baseline_blue0thumb_up_24"
                 android:layout_height="30dp"/>
             <TextView
                 android:text="Like"
@@ -87,14 +88,15 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/commentLayout"
-            android:layout_width="200dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
             <ImageView
                 android:id="@+id/btnComment1"
                 android:layout_width="30dp"
-                android:src="@drawable/ic_baseline_comment_24"
+                android:src="@drawable/ic_baseline_message_24"
                 android:layout_height="30dp"/>
             <TextView
                 android:text="Comment"
