@@ -1,5 +1,4 @@
 package com.theakatsuki.hiredevelopers.Model;
 
-public class Follow {
-    String id;
+public class Job {
 }

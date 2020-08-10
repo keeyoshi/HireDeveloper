@@ -1,14 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="7dp"
     tools:context=".ui.developer.DeveloperFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/browseSearchBar"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Recommended jobs"
+            android:textSize="17dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recommendJobs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Browse by category"
+            android:textSize="17dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+       <GridLayout
+           android:layout_width="match_parent"
+           android:orientation="horizontal"
+           android:columnCount="2"
+           android:rowCount="5"
+           android:layout_margin="8dp"
+           android:layout_height="wrap_content">
+
+           <LinearLayout
+               android:id="@+id/webLinear"
+               android:layout_width="120dp"
+               android:layout_margin="15dp"
+               android:background="@drawable/border"
+               android:orientation="vertical"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:gravity="center_horizontal"
+               android:layout_height="150dp">
+               <ImageView
+                   android:layout_width="60dp"
+                   android:src="@drawable/speed"
+                   android:layout_weight="1"
+                   android:layout_height="60dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:textSize="18dp"
+                   android:text="Website, IT and Software"
+                   android:paddingBottom="10dp"
+                   android:layout_height="wrap_content"/>
+           </LinearLayout>
+           <LinearLayout
+               android:id="@+id/designLinear"
+               android:layout_width="120dp"
+               android:layout_margin="15dp"
+               android:background="@drawable/border"
+               android:orientation="vertical"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:gravity="center_horizontal"
+               android:layout_height="150dp">
+               <ImageView
+                   android:layout_width="60dp"
+                   android:src="@drawable/content"
+                   android:layout_weight="1"
+                   android:layout_height="60dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:textSize="18dp"
+                   android:text="Design, Media and Architecture"
+                   android:paddingBottom="10dp"
+                   android:layout_height="wrap_content"/>
+           </LinearLayout>
+           <LinearLayout
+               android:id="@+id/writingLinear"
+               android:layout_width="120dp"
+               android:layout_margin="15dp"
+               android:background="@drawable/border"
+               android:orientation="vertical"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:gravity="center_horizontal"
+               android:layout_height="150dp">
+               <ImageView
+                   android:layout_width="60dp"
+                   android:src="@drawable/article"
+                   android:layout_weight="1"
+                   android:layout_height="60dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:textSize="18dp"
+                   android:text="Writing and content"
+                   android:paddingBottom="10dp"
+                   android:layout_height="wrap_content"/>
+           </LinearLayout>
+           <LinearLayout
+               android:id="@+id/salesLinear"
+               android:layout_width="120dp"
+               android:layout_margin="15dp"
+               android:background="@drawable/border"
+               android:orientation="vertical"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:gravity="center_horizontal"
+               android:layout_height="150dp">
+               <ImageView
+                   android:layout_width="50dp"
+                   android:src="@drawable/data"
+                   android:layout_weight="1"
+                   android:layout_height="50dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:textSize="18dp"
+                   android:text="Sales and Marketing"
+                   android:paddingBottom="10dp"
+                   android:layout_height="wrap_content"/>
+           </LinearLayout>
+           <LinearLayout
+               android:id="@+id/mobileLinear"
+               android:layout_width="120dp"
+               android:layout_margin="15dp"
+               android:background="@drawable/border"
+               android:orientation="vertical"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:gravity="center_horizontal"
+               android:layout_height="150dp">
+               <ImageView
+                   android:layout_width="60dp"
+                   android:src="@drawable/smartphone"
+                   android:layout_weight="1"
+                   android:layout_height="60dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:textSize="18dp"
+                   android:text="Mobile Application "
+                   android:paddingBottom="10dp"
+                   android:layout_height="wrap_content"/>
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/dataLinear"
+               android:layout_width="120dp"
+               android:layout_margin="15dp"
+               android:background="@drawable/border"
+               android:orientation="vertical"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:gravity="center_horizontal"
+               android:layout_height="150dp">
+               <ImageView
+                   android:layout_width="50dp"
+                   android:src="@drawable/idea"
+                   android:layout_weight="1"
+                   android:layout_height="50dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:textSize="18dp"
+                   android:text="Data and Admin"
+                   android:paddingBottom="10dp"
+                   android:layout_height="wrap_content"/>
+           </LinearLayout>
+
+
+
+
+       </GridLayout>
+    </LinearLayout>
+</ScrollView>

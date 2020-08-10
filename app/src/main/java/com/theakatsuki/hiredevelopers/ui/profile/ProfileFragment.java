@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,24 +34,19 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.theakatsuki.hiredevelopers.Activity.AddEventActivity;
-import com.theakatsuki.hiredevelopers.Activity.EditProfileActivity;
 import com.theakatsuki.hiredevelopers.Activity.MainActivity;
-import com.theakatsuki.hiredevelopers.Model.Follow;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
 import static android.app.Activity.RESULT_OK;
 
 
 public class ProfileFragment extends Fragment {
 
-    CircleImageView profileImage;
+
     ImageButton addPhoto;
     ImageView eventImage;
     TextView fullName,content;
@@ -64,6 +57,7 @@ public class ProfileFragment extends Fragment {
     private Uri imageURl;
     private StorageTask<UploadTask.TaskSnapshot> uploadsTask;
     ProgressBar progressBar;
+    private long countPost = 0 ;
 
 
     @Override
@@ -73,7 +67,6 @@ public class ProfileFragment extends Fragment {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        profileImage = view.findViewById(R.id.add_profile_image);
         eventImage = view.findViewById(R.id.showEventImage);
         addPhoto = view.findViewById(R.id.addPhoto);
         fullName = view.findViewById(R.id.add_event_username);
@@ -82,17 +75,11 @@ public class ProfileFragment extends Fragment {
         progressBar = view.findViewById(R.id.progress);
         storageReference = FirebaseStorage.getInstance().getReference("EventImage");
 
-
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                fullName.setText(user.getFullname());
-                if (user.getProfileImage().equals("Default")) {
-                    profileImage.setImageResource(R.mipmap.ic_launcher);
-                } else {
-                    Glide.with(getContext()).load(user.getProfileImage()).into(profileImage);
-                }
+                countPost = dataSnapshot.getChildrenCount();
             }
 
             @Override
@@ -101,10 +88,33 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        reference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                fullName.setText(user.getFullname());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadImage();
+                if(content.getText().equals(null) || imageURl == null)
+                {
+                    Toast.makeText(getContext(), "The Event does not have a content", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    uploadImage();
+                }
             }
         });
         addPhoto.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +155,7 @@ public class ProfileFragment extends Fragment {
     {
         progressBar.setVisibility(View.VISIBLE);
         final String text = content.getText().toString();
+
         if(imageURl !=null)
         {
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis()
@@ -166,14 +177,18 @@ public class ProfileFragment extends Fragment {
                     Uri downloadUri = task.getResult();
                     String mUri = downloadUri.toString();
                     String text = content.getText().toString();
+
                     if (task.isSuccessful())
                     {
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
+                        String postId = reference.push().getKey();
                         HashMap<String,Object> hashMap = new HashMap<>();
                         hashMap.put("content",text);
+                        hashMap.put("count",countPost);
                         hashMap.put("eventImage",mUri);
-                        hashMap.put("userid",firebaseUser.getUid());
-                        reference.child("Events").push().setValue(hashMap);
+                        hashMap.put("userId",firebaseUser.getUid());
+                        hashMap.put("postId",postId);
+                        reference.push().setValue(hashMap);
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                         content.setText("");
@@ -193,10 +208,15 @@ public class ProfileFragment extends Fragment {
         }
         else {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+            String postId = reference.push().getKey();
             HashMap<String,Object> hashMap = new HashMap<>();
+            hashMap.put("postId",postId);
+            hashMap.put("count",countPost);
             hashMap.put("content",text);
             hashMap.put("eventImage","Blank");
-            hashMap.put("userid",firebaseUser.getUid());
+            hashMap.put("userId",firebaseUser.getUid());
+            hashMap.put("id",reference.push().getKey());
+
             reference.child("Events").push().setValue(hashMap);
             progressBar.setVisibility(View.GONE);
             Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();

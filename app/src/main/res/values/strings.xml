@@ -4,7 +4,7 @@
     <string name="title_my_network">My network</string>
     <string name="title_post">Post</string>
     <string name="title_notifications">Notification</string>
-    <string name="title_development">Development</string>
+    <string name="title_development">Browse</string>
     <string name="title_register">Register user</string>
     <string name="title_login">Login</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -16,4 +16,5 @@
     <string name="add_event_hint">What is on your mind? </string>
     <string name="confirmPassword">Confirm password </string>
     <string name="editProfile">Edit profile </string>
+
 </resources>
