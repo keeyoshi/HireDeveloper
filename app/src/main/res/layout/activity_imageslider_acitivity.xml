@@ -9,9 +9,20 @@
 
     <ViewFlipper
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="600dp"
         android:layout_gravity="center"
         android:id="@+id/viewflipper">
 
 </ViewFlipper>
+    <Button
+        android:layout_width="406dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnjoin"
+        android:text="Join Us through Email/Username"
+        android:textColor="@color/black"
+        android:layout_marginTop="6dp"
+        android:textSize="20dp"
+        android:background="#0000"
+        />
+
 </LinearLayout>

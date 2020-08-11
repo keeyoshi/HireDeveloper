@@ -15,7 +15,7 @@ ViewFlipper viewFlipper;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageslider_acitivity);
 
-       int imgarray[]= {R.drawable.cover2,R.drawable.cover3,R.drawable.cover5,R.drawable.coverone};
+       int imgarray[]= {R.drawable.one,R.drawable.two,R.drawable.three,R.drawable.four};
         viewFlipper= findViewById(R.id.viewflipper);
         for(int i=0;i<imgarray.length;i++)
             showimage(imgarray[i]);
