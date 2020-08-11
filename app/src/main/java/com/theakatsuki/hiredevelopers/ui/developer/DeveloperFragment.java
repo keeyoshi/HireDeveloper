@@ -50,6 +50,7 @@ public class DeveloperFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_developer, container, false);
 
 
+
         webLinear = view.findViewById(R.id.webLinear);
         designLinear = view.findViewById(R.id.designLinear);
         writingLinear = view.findViewById(R.id.writingLinear);
@@ -169,6 +170,7 @@ public class DeveloperFragment extends Fragment {
             TextView user_name = (TextView) mView.findViewById(R.id.name_text);
             TextView user_status = (TextView) mView.findViewById(R.id.status_text);
             ImageView user_image = (ImageView) mView.findViewById(R.id.profile_image);
+
 
             user_name.setText(fullname);
             user_status.setText(userStatus);
