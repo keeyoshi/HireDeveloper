@@ -61,4 +61,5 @@ dependencies {
 
     implementation 'io.paperdb:paperdb:2.7.1'
 
+    implementation 'com.firebaseui:firebase-ui-database:2.3.0'
 }
