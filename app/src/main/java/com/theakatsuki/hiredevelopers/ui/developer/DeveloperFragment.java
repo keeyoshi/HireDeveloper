@@ -105,7 +105,7 @@ public class DeveloperFragment extends Fragment {
         mSearchBtn=view.findViewById(R.id.search_btn);
 
         mResultList = (RecyclerView) view.findViewById(R.id.result_list);
-        mResultList.setHasFixedSize(true);
+        mResultList.setHasFixedSize(false);
         mResultList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
