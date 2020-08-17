@@ -60,6 +60,5 @@ dependencies {
     implementation 'org.mockito:mockito-core:2.28.1'
 
     implementation 'io.paperdb:paperdb:2.7.1'
-
     implementation 'com.firebaseui:firebase-ui-database:2.3.0'
 }

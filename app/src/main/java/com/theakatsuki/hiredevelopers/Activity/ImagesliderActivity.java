@@ -1,5 +1,6 @@
 package com.theakatsuki.hiredevelopers.Activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,24 +13,27 @@ import android.widget.ViewFlipper;
 import com.theakatsuki.hiredevelopers.R;
 
 public class ImagesliderActivity extends AppCompatActivity {
-ViewFlipper viewFlipper;
-Button button;
+    ViewFlipper viewFlipper;
+    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageslider_acitivity);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.hide();
+
         button=findViewById(R.id.btnjoin);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Intent intent = new Intent(ImagesliderActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                Intent intent = new Intent(ImagesliderActivity.this, LoginActivity.class);
+                startActivity(intent);
 
             }
         });
 
-       int imgarray[]= {R.drawable.one,R.drawable.two,R.drawable.three,R.drawable.four};
+        int imgarray[]= {R.drawable.one,R.drawable.two,R.drawable.three,R.drawable.four};
         viewFlipper= findViewById(R.id.viewflipper);
         for(int i=0;i<imgarray.length;i++)
             showimage(imgarray[i]);
