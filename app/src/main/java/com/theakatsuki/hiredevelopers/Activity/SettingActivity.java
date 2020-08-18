@@ -1,10 +1,12 @@
 package com.theakatsuki.hiredevelopers.Activity;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.view.WindowManager.LayoutParams;
@@ -25,6 +27,7 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -115,12 +118,12 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         
-//        NotificationSetting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                notificationSetting();
-//            }
-//        });
+        NotificationSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notificationSetting();
+            }
+        });
 
         BrightNessSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,5 +151,26 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void notificationSetting() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(SettingActivity.this);
+        builder.setTitle("Notification Settings");
+        builder.setMessage("Do you want to turn off Notification");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(SettingActivity.this, "Notification will be Turn OFf", Toast.LENGTH_SHORT).show();
+
+                Intent intent=new Intent(SettingActivity.this,SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.show();
     }
 }
