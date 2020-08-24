@@ -48,14 +48,14 @@
         android:text="@string/title_content"
         android:layout_width="match_parent"
         android:layout_below="@id/userProfileImage"
-        android:textSize="14dp"
+        android:textSize="18dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_height="wrap_content"/>
     <ImageView
         android:id="@+id/ContentImage"
         android:src="@drawable/welcome"
-        android:layout_marginTop="10dp"
+        android:layout_margin="8dp"
         android:visibility="visible"
         android:layout_below="@id/eventContent"
         android:layout_width="match_parent"

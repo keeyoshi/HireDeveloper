@@ -11,7 +11,7 @@
             android:id="@+id/textViewLikeCount"
             android:layout_toLeftOf="@id/btnLike2"
             android:layout_width="match_parent"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="15dp"
             android:textStyle="bold"

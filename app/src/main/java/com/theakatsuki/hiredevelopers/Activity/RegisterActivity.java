@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
     AutoCompleteTextView username;
+    CheckBox chkTerms;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
@@ -45,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         fullname = findViewById(R.id.name);
         work = findViewById(R.id.workPlace);
+        chkTerms=findViewById(R.id.terms_conditions);
         phoneNumber = findViewById(R.id.phonenumber);
         btnRegister = findViewById(R.id.register);
         LoginButton=findViewById(R.id.login);
@@ -83,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                     username.requestFocus();
                 }
 
+
                 else if(TextUtils.isEmpty(number)){
                     phoneNumber.setError("Phone Number not Entered");
                     phoneNumber.requestFocus();
@@ -117,6 +121,10 @@ public class RegisterActivity extends AppCompatActivity {
                 else if(pass.length()<8){
                     password.setError("Password at least 8 characters");
                     password.requestFocus();
+                }
+
+                else if(!chkTerms.isChecked()){
+                    Toast.makeText(RegisterActivity.this, "Please check the condition", Toast.LENGTH_SHORT).show();
                 }
 
                 else {
