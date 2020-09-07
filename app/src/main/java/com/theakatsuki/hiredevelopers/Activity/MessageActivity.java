@@ -300,8 +300,8 @@ public class MessageActivity extends AppCompatActivity {
                 chats.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
-                    if(chat.getMsgReceiver().equals(userid) && chat.getMsgSender().equals(myid)||
-                    chat.getMsgReceiver().equals(myid) && chat.getMsgSender().equals(userid))
+                    if(chat.getMsgReciver().equals(userid) && chat.getMsgSender().equals(myid)||
+                    chat.getMsgReciver().equals(myid) && chat.getMsgSender().equals(userid))
                     {
                         chats.add(chat);
                     }

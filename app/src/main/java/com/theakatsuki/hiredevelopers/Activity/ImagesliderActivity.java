@@ -33,7 +33,7 @@ public class ImagesliderActivity extends AppCompatActivity {
             }
         });
 
-        int imgarray[]= {R.drawable.one,R.drawable.two,R.drawable.three,R.drawable.four};
+        int imgarray[]= {R.drawable.one,R.drawable.two,R.drawable.three};
         viewFlipper= findViewById(R.id.viewflipper);
         for(int i=0;i<imgarray.length;i++)
             showimage(imgarray[i]);

@@ -51,7 +51,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final User user = users.get(position);
         holder.username.setText(user.getFullname());
-        if(user.getProfileImage().equals("Default"))
+        if(user.getProfileImage().equals("default"))
         {
             holder.profile.setImageResource(R.mipmap.ic_launcher);
         }
@@ -89,7 +89,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MessageActivity.class);
-                intent.putExtra("userId",user.getId());
+                intent.putExtra("userid",user.getId());
                 context.startActivity(intent);
             }
         });
@@ -127,8 +127,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                     Chat chat = dataSnapshot1.getValue(Chat.class);
-                    if(chat.getMsgReceiver().equals(firebaseUser.getUid() )&& chat.getMsgSender().equals(userid)
-                    || chat.getMsgSender().equals(firebaseUser.getUid() )&& chat.getMsgReceiver().equals(userid))
+                    if(chat.getMsgReciver().equals(firebaseUser.getUid() )&& chat.getMsgSender().equals(userid)
+                    || chat.getMsgSender().equals(firebaseUser.getUid() )&& chat.getMsgReciver().equals(userid))
                     {
                         thelastmessage= chat.getMessage();
 

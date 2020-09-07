@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Activity.JobsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:rowCount="1"
+        android:columnCount="2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnShowDevelopers"
+            android:layout_width="60dp"
+            android:text="Developers"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnShowJobs"
+            android:layout_width="60dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:text="Jobs"
+            android:layout_height="wrap_content"/>
+    </GridLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewJobActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

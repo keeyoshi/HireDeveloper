@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +47,7 @@ public class DeveloperFragment extends Fragment {
     DatabaseReference mUserDatabase;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_developer, container, false);
 
@@ -62,6 +63,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Website");
                 startActivity(intent);
             }
         });
@@ -69,6 +71,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Design");
                 startActivity(intent);
             }
         });
@@ -76,6 +79,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Content");
                 startActivity(intent);
             }
         });
@@ -83,6 +87,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Marketing");
                 startActivity(intent);
             }
         });
@@ -90,6 +95,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Mobile");
                 startActivity(intent);
             }
         });
@@ -97,6 +103,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Data");
                 startActivity(intent);
             }
         });
@@ -136,7 +143,7 @@ public class DeveloperFragment extends Fragment {
 
         Query firebaseSearchQuery = mUserDatabase.orderByChild("fullname").startAt(searchText).endAt(searchText + "\uf8ff");
 
-        FirebaseRecyclerAdapter<User, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UsersViewHolder>(
+        FirebaseRecyclerAdapter<User, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User,UsersViewHolder>(
 
                 User.class,
                 R.layout.list_layout,
@@ -158,7 +165,6 @@ public class DeveloperFragment extends Fragment {
     }
 
 
-    // View Holder Class
 
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
 
@@ -180,8 +186,15 @@ public class DeveloperFragment extends Fragment {
 
             user_name.setText(fullname);
             user_status.setText(userStatus);
+            if(userImage.equals("Default"))
+            {
+                Glide.with(ctx).load(R.drawable.male).into(user_image);
 
-            Glide.with(ctx).load(userImage).into(user_image);
+            }
+            else{
+                Glide.with(ctx).load(userImage).into(user_image);
+            }
+
 
 
         }

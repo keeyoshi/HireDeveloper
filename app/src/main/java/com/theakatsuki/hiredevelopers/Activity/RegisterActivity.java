@@ -12,6 +12,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,10 @@ import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 import com.theakatsuki.hiredevelopers.common.Common;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisterActivity extends AppCompatActivity {
     EditText password,fullname,phoneNumber, email,work;
     Button btnRegister;
@@ -32,14 +37,24 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
     AutoCompleteTextView username;
-    CheckBox chkTerms;
+    LinearLayout programmingList;
+    CheckBox chkDesign, chkData,chkContent,chkWebsite,chkMobile,chkMarketing;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        programmingList= findViewById(R.id.programmingList);
+        Intent intent = getIntent();
+        final String as = intent.getStringExtra("As");
+        if(as.equals("User"))
+        {
+            programmingList.setVisibility(View.GONE);
+        }
+        else {
+            programmingList.setVisibility(View.VISIBLE);
+        }
         firebaseAuth = FirebaseAuth.getInstance();
         username = findViewById(R.id.country);
         progressBar= findViewById(R.id.progressbar);
@@ -47,11 +62,15 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         fullname = findViewById(R.id.name);
         work = findViewById(R.id.workPlace);
-        chkTerms=findViewById(R.id.terms_conditions);
         phoneNumber = findViewById(R.id.phonenumber);
         btnRegister = findViewById(R.id.register);
         LoginButton=findViewById(R.id.login);
-
+        chkContent= findViewById(R.id.chkContentDev);
+        chkData= findViewById(R.id.chkDataDev);
+        chkMobile= findViewById(R.id.chkMobileDev);
+        chkMarketing= findViewById(R.id.chkMarketingDev);
+        chkWebsite= findViewById(R.id.chkWebsiteDev);
+        chkDesign= findViewById(R.id.chkDesignDev);
         ArrayAdapter<String> stringArrayAdapter=new ArrayAdapter<>(this,android.R.layout.select_dialog_item, Common.countryName);
         username.setAdapter(stringArrayAdapter);
         username.setThreshold(1);
@@ -123,22 +142,48 @@ public class RegisterActivity extends AppCompatActivity {
                     password.requestFocus();
                 }
 
-                else if(!chkTerms.isChecked()){
-                    Toast.makeText(RegisterActivity.this, "Please check the condition", Toast.LENGTH_SHORT).show();
-                }
-
                 else {
+
+                    final List<String> list=new ArrayList<String>();
+                    if(chkContent.isChecked())
+                    {
+                        list.add("Content");
+                    }
+                    if(chkData.isChecked())
+                    {
+                        list.add("Data");
+                    }
+                    if(chkDesign.isChecked())
+                    {
+                        list.add("Design");
+                    }
+                    if(chkMobile.isChecked())
+                    {
+                        list.add("Mobile");
+                    }
+                    if(chkWebsite.isChecked())
+                    {
+                        list.add("Website");
+                    }
+                    if(chkMarketing.isChecked())
+                    {
+                        list.add("Marketing");
+                    }
+                    if(list.size()==0)
+                    {
+                        list.add("Null");
+                    }
                     firebaseAuth.createUserWithEmailAndPassword(emailAddress, pass)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(), name, number, workP, userName, emailAddress, pass, image,"online");
+                                        User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(), name, number, workP, userName, emailAddress, pass, image,"online",list);
                                         FirebaseDatabase.getInstance().getReference("Users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(user);
                                         progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(intent);
                                     } else {
@@ -151,6 +196,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                             });
                 }
+
+
             }
         });
     }

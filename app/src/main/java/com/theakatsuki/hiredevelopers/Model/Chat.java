@@ -32,7 +32,7 @@ public class Chat {
         this.message = message;
     }
 
-    public String getMsgReceiver() {
+    public String getMsgReciver() {
         return msgReceiver;
     }
 

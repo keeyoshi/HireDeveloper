@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -9,187 +9,282 @@
     android:background="#fff"
     tools:context="com.theakatsuki.hiredevelopers.Activity.RegisterActivity">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Register Page"
-        android:textColor="#000"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+<!--    <TextView-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="Register Page"-->
+<!--        android:textColor="#000"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textStyle="bold" />-->
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="@color/black" />
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/input_design"
-        android:drawableLeft="@drawable/ic_baseline_person_24"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:hint="Full Name"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        android:inputType="textCapWords"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
-        android:textSize="18dp" />
+<!--    <View-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="1px"-->
+<!--        android:background="@color/black" />-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:orientation="vertical"
+       android:layout_height="wrap_content">
 
-    <AutoCompleteTextView
-        android:id="@+id/country"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/input_design"
-        android:drawableLeft="@drawable/ic_baseline_place_24"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:hint="Country"
-        android:inputType="textCapWords"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
-        android:textSize="18dp"/>
+       <EditText
+           android:id="@+id/name"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/input_design"
+           android:drawableLeft="@drawable/ic_baseline_person_24"
+           android:drawablePadding="8dp"
+           android:gravity="center_vertical"
+           android:hint="Full Name"
+           android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+           android:inputType="textCapWords"
+           android:padding="10dp"
+           android:singleLine="true"
+           android:textColor="#000000"
+           android:textColorHint="#000000"
+           android:textSize="18dp" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="#000000" />
+       <AutoCompleteTextView
+           android:id="@+id/country"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/input_design"
+           android:drawableLeft="@drawable/ic_baseline_place_24"
+           android:drawablePadding="8dp"
+           android:gravity="center_vertical"
+           android:hint="Country"
+           android:inputType="textCapWords"
+           android:padding="10dp"
+           android:singleLine="true"
+           android:textColor="#000000"
+           android:textColorHint="#000000"
+           android:textSize="18dp"/>
 
-    <EditText
-        android:id="@+id/phonenumber"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_design"
-        android:drawableLeft="@drawable/ic_baseline_smartphone_24"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:hint="Phone Number"
-        android:inputType="number"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="18dp"/>
+       <View
+           android:layout_width="fill_parent"
+           android:layout_height="1px"
+           android:background="#000000" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="#000000" />
+       <EditText
+           android:id="@+id/phonenumber"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="5dp"
+           android:background="@drawable/input_design"
+           android:drawableLeft="@drawable/ic_baseline_smartphone_24"
+           android:drawablePadding="8dp"
+           android:gravity="center_vertical"
+           android:hint="Phone Number"
+           android:inputType="number"
+           android:padding="10dp"
+           android:singleLine="true"
+           android:textColor="@color/black"
+           android:textColorHint="@color/black"
+           android:textSize="18dp"/>
 
-    <EditText
-        android:id="@+id/workPlace"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_design"
-        android:drawableLeft="@drawable/ic_baseline_work_24"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:hint="Current Working"
-        android:inputType="textCapWords"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="18dp"/>
+       <View
+           android:layout_width="fill_parent"
+           android:layout_height="1px"
+           android:background="#000000" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="#000000" />
+       <EditText
+           android:id="@+id/workPlace"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="5dp"
+           android:background="@drawable/input_design"
+           android:drawableLeft="@drawable/ic_baseline_work_24"
+           android:drawablePadding="8dp"
+           android:gravity="center_vertical"
+           android:hint="Currently Working"
+           android:inputType="textCapWords"
+           android:padding="10dp"
+           android:singleLine="true"
+           android:textColor="@color/black"
+           android:textColorHint="@color/black"
+           android:textSize="18dp"/>
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_design"
-        android:drawableLeft="@drawable/ic_baseline_email_24"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:hint="Email Address"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="18dp"/>
+       <View
+           android:layout_width="fill_parent"
+           android:layout_height="1px"
+           android:background="#000000" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="#000000" />
+       <EditText
+           android:id="@+id/email"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="5dp"
+           android:background="@drawable/input_design"
+           android:drawableLeft="@drawable/ic_baseline_email_24"
+           android:drawablePadding="8dp"
+           android:gravity="center_vertical"
+           android:hint="Email Address"
+           android:inputType="textEmailAddress"
+           android:padding="10dp"
+           android:singleLine="true"
+           android:textColor="@color/black"
+           android:textColorHint="@color/black"
+           android:textSize="18dp"/>
+
+       <View
+           android:layout_width="fill_parent"
+           android:layout_height="1px"
+           android:background="#000000" />
 
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_design"
-        android:drawableLeft="@drawable/password_24"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="18dp"/>
+       <EditText
+           android:id="@+id/password"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="5dp"
+           android:background="@drawable/input_design"
+           android:drawableLeft="@drawable/password_24"
+           android:drawablePadding="8dp"
+           android:gravity="center_vertical"
+           android:hint="Password"
+           android:inputType="textPassword"
+           android:padding="10dp"
+           android:singleLine="true"
+           android:textColor="@color/black"
+           android:textColorHint="@color/black"
+           android:textSize="18dp"/>
+       <LinearLayout
+           android:id="@+id/programmingList"
+           android:layout_width="match_parent"
+           android:orientation="vertical"
+           android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:background="#000000" />
+           <TextView
+               android:text="Interested field"
+               android:textSize="18dp"
+               android:textStyle="bold"
+               android:layout_marginTop="5dp"
+               android:textColor="@color/black"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
 
-    <CheckBox
-        android:id="@+id/terms_conditions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:textStyle="bold"
-        android:text="Terms and Condition"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/register"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/button_selector"
-        android:padding="3dp"
-        android:text="Register"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+           <CheckBox
+               android:id="@+id/chkWebsiteDev"
+               android:layout_width="wrap_content"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="7dp"
+               android:textStyle="bold"
+               android:text="Website development"
+               android:textColor="@color/black"
+               android:textSize="16sp"
+               tools:ignore="InvalidId" />
+           <CheckBox
+               android:id="@+id/chkDesignDev"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="7dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:textStyle="bold"
+               android:text="Design and Architecture"
+               android:textColor="@color/black"
+               android:textSize="16sp"
+               />
+           <CheckBox
+               android:id="@+id/chkContentDev"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="7dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:textStyle="bold"
+               android:text="Content writing"
+               android:textColor="@color/black"
+               android:textSize="16sp"
+               tools:ignore="InvalidId" />
+           <CheckBox
+               android:id="@+id/chkMarketingDev"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="7dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:textStyle="bold"
+               android:text="Sales and marketing "
+               android:textColor="@color/black"
+               android:textSize="16sp"
+               tools:ignore="InvalidId" />
+           <CheckBox
+               android:id="@+id/chkMobileDev"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="7dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:textStyle="bold"
+               android:text="Mobile application development"
+               android:textColor="@color/black"
+               android:textSize="16sp"
+               tools:ignore="InvalidId" />
+           <CheckBox
+               android:id="@+id/chkDataDev"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="7dp"
+               android:textStyle="bold"
+               android:text="Data and admin"
+               android:textColor="@color/black"
+               android:textSize="16sp"
+               tools:ignore="InvalidId" />
 
-    <TextView
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Already User"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+       </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+
+       <View
+           android:layout_width="fill_parent"
+           android:layout_height="1px"
+           android:background="#000000" />
+
+       <!--    <CheckBox-->
+       <!--        android:id="@+id/terms_conditions"-->
+       <!--        android:layout_width="wrap_content"-->
+       <!--        android:layout_height="wrap_content"-->
+       <!--        android:layout_marginTop="7dp"-->
+       <!--        android:textStyle="bold"-->
+       <!--        android:text="Terms and Condition"-->
+       <!--        android:textColor="@color/black"-->
+       <!--        android:textSize="16sp" />-->
+
+       <Button
+           android:id="@+id/register"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="15dp"
+           android:background="@drawable/button_selector"
+           android:padding="3dp"
+           android:text="Register"
+           android:textColor="#FFFFFF"
+           android:textSize="20dp"
+           android:textStyle="bold" />
+
+       <TextView
+           android:id="@+id/login"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_horizontal"
+           android:layout_marginTop="5dp"
+           android:gravity="center"
+           android:padding="10dp"
+           android:text="Already User"
+           android:textColor="@color/black"
+           android:textSize="18sp"
+           android:textStyle="bold"/>
+
+       <ProgressBar
+           android:id="@+id/progressbar"
+           android:visibility="gone"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+   </LinearLayout>
+</ScrollView>
