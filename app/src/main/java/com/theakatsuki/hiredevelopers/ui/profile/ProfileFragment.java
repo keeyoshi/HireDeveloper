@@ -1,8 +1,11 @@
 package com.theakatsuki.hiredevelopers.ui.profile;
 
+import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,10 +16,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.Continuation;
@@ -38,9 +49,14 @@ import com.theakatsuki.hiredevelopers.Activity.MainActivity;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+
 import static android.app.Activity.RESULT_OK;
 
 
@@ -49,8 +65,10 @@ public class ProfileFragment extends Fragment {
 
     ImageButton addPhoto;
     ImageView eventImage;
-    TextView fullName,content;
+    EditText content,jobTitle;
+    Spinner spinner,price;
     Button btnPost;
+    LinearLayout addJobLayout;
     FirebaseUser firebaseUser;
     DatabaseReference reference;
     StorageReference storageReference;
@@ -58,6 +76,10 @@ public class ProfileFragment extends Fragment {
     private StorageTask<UploadTask.TaskSnapshot> uploadsTask;
     ProgressBar progressBar;
     private long countPost = 0 ;
+    DatePickerDialog.OnDateSetListener onDateSetListener;
+    TextView dateTimePicker;
+    String date;
+    CheckBox chkDesign, chkData,chkContent,chkWebsite,chkMobile,chkMarketing;
 
 
     @Override
@@ -69,12 +91,60 @@ public class ProfileFragment extends Fragment {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         eventImage = view.findViewById(R.id.showEventImage);
         addPhoto = view.findViewById(R.id.addPhoto);
-        fullName = view.findViewById(R.id.add_event_username);
+        spinner = view.findViewById(R.id.profile_spinner);
+        addJobLayout = view.findViewById(R.id.addJobLayout);
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Event");
+        arrayList.add("Job");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
         content = view.findViewById(R.id.addEventContent);
         btnPost = view.findViewById(R.id.btnPostEvent);
         progressBar = view.findViewById(R.id.progress);
-        storageReference = FirebaseStorage.getInstance().getReference("EventImage");
+        jobTitle = view.findViewById(R.id.pro_job_title);
+        price = view.findViewById(R.id.pro_job_price);
+        dateTimePicker = view.findViewById(R.id.tvDatetimePicker);
+        chkContent= view.findViewById(R.id.chkContentDev1);
+        chkData= view.findViewById(R.id.chkDataDev1);
+        chkMobile= view.findViewById(R.id.chkMobileDev1);
+        chkMarketing= view.findViewById(R.id.chkMarketingDev1);
+        chkWebsite= view.findViewById(R.id.chkWebsiteDev1);
+        chkDesign= view.findViewById(R.id.chkDesignDev1);
+        dateTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),R.style.Theme_AppCompat_Light_Dialog,onDateSetListener,year,month,day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                datePickerDialog.show();
+            }
+        });
+
+        onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month+1;
+                date=month+"/"+day+"/"+year;
+                dateTimePicker.setText(date);
+            }
+        };
+        storageReference = FirebaseStorage.getInstance().getReference("EventImage");
+        ArrayList<String> priceList = new ArrayList<>();
+        priceList.add("$ 10-30");
+        priceList.add("$ 30-250");
+        priceList.add("$ 250-750");
+        priceList.add("$ 750-1500");
+        priceList.add("$ 1500-3000");
+        priceList.add("$ 3000-5000");
+        priceList.add("$ 5000+");
+        ArrayAdapter<String> priceAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, priceList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        price.setAdapter(priceAdapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,34 +157,46 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-
-        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        reference1.addValueEventListener(new ValueEventListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                fullName.setText(user.getFullname());
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               if(parent.getItemAtPosition(position).toString().equals("Job")){
+                   addJobLayout.setVisibility(View.VISIBLE);
+                   addPhoto.setVisibility(View.GONE);
+                   content.setVisibility(View.GONE);
+               }
+               else
+               {
+                   addJobLayout.setVisibility(View.GONE);
+                   addPhoto.setVisibility(View.VISIBLE);
+                   content.setVisibility(View.VISIBLE);
+               }
+
 
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onNothingSelected(AdapterView <?> parent) {
             }
         });
-
-
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(content.getText().equals(null) || imageURl == null)
+                if(spinner.getSelectedItem().toString().equals("Event"))
                 {
-                    Toast.makeText(getContext(), "The Event does not have a content", Toast.LENGTH_SHORT).show();
+                    if(content.getText().equals(null) && imageURl == null)
+                    {
+                        Toast.makeText(getContext(), "The Event does not have a content", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        uploadImage();
+                    }
                 }
                 else
                 {
-                    uploadImage();
+                    PostJob();
                 }
+
             }
         });
         addPhoto.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +207,57 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
+
+    private void PostJob() {
+        final List<String> list=new ArrayList<String>();
+        if(chkContent.isChecked())
+        {
+            list.add("Content");
+        }
+        if(chkData.isChecked())
+        {
+            list.add("Data");
+        }
+        if(chkDesign.isChecked())
+        {
+            list.add("Design");
+        }
+        if(chkMobile.isChecked())
+        {
+            list.add("Mobile");
+        }
+        if(chkWebsite.isChecked())
+        {
+            list.add("Website");
+        }
+        if(chkMarketing.isChecked())
+        {
+            list.add("Marketing");
+        }
+        if(list.size()==0)
+        {
+            chkContent.setError("Please select a requirement");
+            chkContent.requestFocus();
+        }
+        else
+        {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Jobs");
+            String postId = reference.push().getKey();
+            HashMap<String,Object> hashMap = new HashMap<>();
+            hashMap.put("title",jobTitle.getText().toString());
+            hashMap.put("price",price.getSelectedItem().toString());
+            hashMap.put("date",dateTimePicker.getText().toString());
+            hashMap.put("id",postId);
+            hashMap.put("requirement",list);
+            jobTitle.setText("");
+            dateTimePicker.setText("Click to select a date");
+            reference.child(firebaseUser.getUid()).push().setValue(hashMap);
+            Toast.makeText(getContext(), "Job posted", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
     private void openImage() {
         Intent intent = new Intent();
         intent.setType("image/*");

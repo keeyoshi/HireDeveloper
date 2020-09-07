@@ -54,7 +54,7 @@ public class JobsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 job.setBackgroundColor(getResources().getColor(R.color.clickColor));
                 dev.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                showJobs(category);
+//                showJobs(category);
             }
         });
 
@@ -90,35 +90,35 @@ public class JobsActivity extends AppCompatActivity {
             }
         });
     }
-    private void showJobs(final String category) {
-        userList= new ArrayList<>();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Jobs");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userList.clear();
-                for(DataSnapshot snapshot :  dataSnapshot.getChildren())
-                {
-                    User user = snapshot.getValue(User.class);
-                    List<String> programming= user.getProgramming();
-                    for(String program:programming)
-                    {
-
-                        if(program.equals(category))
-                        {
-                            userList.add(user);
-                        }
-                    }
-
-                }
-                UserAdapter userAdapter = new UserAdapter(getApplicationContext(),userList,true);
-                jobRecyclerView.setAdapter(userAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
+//    private void showJobs(final String category) {
+//        userList= new ArrayList<>();
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Jobs");
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+////                userList.clear();
+////                for(DataSnapshot snapshot :  dataSnapshot.getChildren())
+////                {
+////                    User user = snapshot.getValue(User.class);
+////                    List<String> programming= user.getProgramming();
+////                    for(String program:programming)
+////                    {
+////
+////                        if(program.equals(category))
+////                        {
+////                            userList.add(user);
+////                        }
+////                    }
+////
+////                }
+////                UserAdapter userAdapter = new UserAdapter(getApplicationContext(),userList,true);
+////                jobRecyclerView.setAdapter(userAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 }
