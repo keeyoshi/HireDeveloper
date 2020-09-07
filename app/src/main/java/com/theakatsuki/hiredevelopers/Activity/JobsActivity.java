@@ -103,6 +103,7 @@ public class JobsActivity extends AppCompatActivity {
                     List<String> programming= user.getProgramming();
                     for(String program:programming)
                     {
+
                         if(program.equals(category))
                         {
                             userList.add(user);
