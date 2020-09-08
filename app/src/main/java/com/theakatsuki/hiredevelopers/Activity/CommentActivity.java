@@ -150,7 +150,6 @@ public class CommentActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Comment send", Toast.LENGTH_SHORT).show();
             commentBox.setText("");
-            readComments(postId);
         }
 
     }

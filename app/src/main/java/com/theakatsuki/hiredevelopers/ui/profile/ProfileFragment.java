@@ -248,11 +248,18 @@ public class ProfileFragment extends Fragment {
             hashMap.put("price",price.getSelectedItem().toString());
             hashMap.put("date",dateTimePicker.getText().toString());
             hashMap.put("id",postId);
+            hashMap.put("userId",firebaseUser.getUid());
             hashMap.put("requirement",list);
+            reference.push().setValue(hashMap);
+            Toast.makeText(getContext(), "Job posted", Toast.LENGTH_SHORT).show();
             jobTitle.setText("");
             dateTimePicker.setText("Click to select a date");
-            reference.child(firebaseUser.getUid()).push().setValue(hashMap);
-            Toast.makeText(getContext(), "Job posted", Toast.LENGTH_SHORT).show();
+            chkContent.setChecked(false);
+            chkData.setChecked(false);
+            chkDesign.setChecked(false);
+            chkMarketing.setChecked(false);
+            chkMobile.setChecked(false);
+            chkWebsite.setChecked(false);
         }
 
 

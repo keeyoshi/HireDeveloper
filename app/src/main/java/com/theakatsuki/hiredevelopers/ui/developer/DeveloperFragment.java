@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,33 +25,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.theakatsuki.hiredevelopers.Activity.JobsActivity;
-import com.theakatsuki.hiredevelopers.Adapter.JobAdapter;
-import com.theakatsuki.hiredevelopers.Model.Job;
+
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class DeveloperFragment extends Fragment {
 
-    RecyclerView jobRecyclerView, mResultList;
-    JobAdapter jobAdapter;
-    List<Job> jobs;
+    RecyclerView  mResultList;
     EditText mSearchField;
     ImageButton mSearchBtn;
     LinearLayout webLinear,designLinear,writingLinear,salesLinear,mobileLinear,dataLinear;
-    RecyclerView.LayoutManager layoutManager;
     DatabaseReference mUserDatabase;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_developer, container, false);
-
-
-
         webLinear = view.findViewById(R.id.webLinear);
         designLinear = view.findViewById(R.id.designLinear);
         writingLinear = view.findViewById(R.id.writingLinear);

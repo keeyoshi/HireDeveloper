@@ -82,7 +82,7 @@ public class MessageActivity extends AppCompatActivity {
         texmessage=findViewById(R.id.sendmessage);
         progressBar = findViewById(R.id.progressBar);
         intent=getIntent();
-        userid = intent.getStringExtra("userId");
+        userid = intent.getStringExtra("userid");
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -300,8 +300,8 @@ public class MessageActivity extends AppCompatActivity {
                 chats.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
-                    if(chat.getMsgReciver().equals(userid) && chat.getMsgSender().equals(myid)||
-                    chat.getMsgReciver().equals(myid) && chat.getMsgSender().equals(userid))
+                    if(chat.getMsgReceiver().equals(userid) && chat.getMsgSender().equals(myid)||
+                    chat.getMsgReceiver().equals(myid) && chat.getMsgSender().equals(userid))
                     {
                         chats.add(chat);
                     }

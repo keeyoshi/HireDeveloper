@@ -6,14 +6,35 @@ import java.util.List;
 public class Job {
     String title;
     String price;
+    String id;
     List<String> requirement;
-    Date closingDate;
+    String date;
+    String userId;
 
-    public Job(String title, String price, List<String> requirement, Date closingDate) {
+
+    public Job(String title, String price, String id, List<String> requirement, String date, String userId) {
         this.title = title;
         this.price = price;
+        this.id = id;
         this.requirement = requirement;
-        this.closingDate = closingDate;
+        this.date = date;
+        this.userId = userId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -40,12 +61,13 @@ public class Job {
         this.requirement = requirement;
     }
 
-    public Date getClosingDate() {
-        return closingDate;
+
+    public String getDate() {
+        return date;
     }
 
-    public void setClosingDate(Date closingDate) {
-        this.closingDate = closingDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Job() {

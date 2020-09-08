@@ -24,9 +24,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.theakatsuki.hiredevelopers.Adapter.HomeAdapter;
+import com.theakatsuki.hiredevelopers.Adapter.JobAdapter;
 import com.theakatsuki.hiredevelopers.Adapter.ProfileAdapter;
 import com.theakatsuki.hiredevelopers.AllFunctions;
 import com.theakatsuki.hiredevelopers.Model.Events;
+import com.theakatsuki.hiredevelopers.Model.Job;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
@@ -43,9 +45,10 @@ public class ProfileActivity extends AppCompatActivity {
     CircleImageView circleImageView;
     TextView name, post, followers,following;
     ImageView home, job, about;
-    RecyclerView recyclerView,jobRecyclerView;
+    RecyclerView recyclerView;
     String userId;
     List<Events> events;
+    List<Job> jobs;
     FirebaseUser firebaseUser;
     ProfileAdapter profileAdapter;
     Button btnMessage, btnFollow;
@@ -65,7 +68,6 @@ public class ProfileActivity extends AppCompatActivity {
         job= findViewById(R.id.proWork);
         about= findViewById(R.id.proAbout);
         recyclerView= findViewById(R.id.proHomeRecyclerView);
-        jobRecyclerView= findViewById(R.id.jobRecyclerView);
         linearLayout = findViewById(R.id.linearL);
         btnFollow = findViewById(R.id.proBtnFollow);
         btnMessage = findViewById(R.id.proBtnMessage);
@@ -76,6 +78,8 @@ public class ProfileActivity extends AppCompatActivity {
         readProfile(userId);
         readFollowers(userId);
         readFollowing(userId);
+        jobs = new ArrayList<>();
+        events = new ArrayList<>();
         home.setBackgroundColor(getResources().getColor(R.color.clickColor));
         readEvents(userId);
         if (firebaseUser.getUid().equals(userId))
@@ -124,21 +128,20 @@ public class ProfileActivity extends AppCompatActivity {
         job.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                recyclerView.setVisibility(View.VISIBLE);
                 home.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 job.setBackgroundColor(getResources().getColor(R.color.clickColor));
                 about.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                recyclerView.setVisibility(View.GONE);
-                jobRecyclerView.setVisibility(View.VISIBLE);
+                readJobs(userId);
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                recyclerView.setVisibility(View.VISIBLE);
                 home.setBackgroundColor(getResources().getColor(R.color.clickColor));
                 job.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 about.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                jobRecyclerView.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
                 readEvents(userId);
             }
         });
@@ -148,7 +151,6 @@ public class ProfileActivity extends AppCompatActivity {
                 home.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 job.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 about.setBackgroundColor(getResources().getColor(R.color.clickColor));
-                jobRecyclerView.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
             }
         });
@@ -211,7 +213,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
     public void readEvents (final String userId)
     {
-        events = new ArrayList<>();
+        events.clear();
+        jobs.clear();
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Events");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -229,6 +232,37 @@ public class ProfileActivity extends AppCompatActivity {
                 post.setText(events.size()+"");
                 profileAdapter = new ProfileAdapter(getApplicationContext(),events,firebaseUser.getUid());
                 recyclerView.setAdapter(profileAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void readJobs (final String userId)
+    {
+
+        events.clear();
+        jobs.clear();
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Jobs");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 :dataSnapshot.getChildren())
+                {
+                    Job job = dataSnapshot1.getValue(Job.class);
+                    if(job.getUserId().equals(userId))
+                    {
+                        jobs.add(job);
+                    }
+
+                }
+                Collections.reverse(jobs);
+                JobAdapter jobAdapter = new JobAdapter(getApplicationContext(),jobs);
+                recyclerView.setAdapter(jobAdapter);
             }
 
             @Override
