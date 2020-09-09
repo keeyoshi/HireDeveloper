@@ -7,18 +7,27 @@ public class Job {
     String title;
     String price;
     String id;
+    String description;
     List<String> requirement;
     String date;
     String userId;
 
-
-    public Job(String title, String price, String id, List<String> requirement, String date, String userId) {
+    public Job(String title, String price, String id, String description, List<String> requirement, String date, String userId) {
         this.title = title;
         this.price = price;
         this.id = id;
+        this.description = description;
         this.requirement = requirement;
         this.date = date;
         this.userId = userId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getId() {

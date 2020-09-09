@@ -9,6 +9,7 @@ public class User {
     String phoneNumber;
     String work;
     String country;
+    String bio;
     String email;
     String password;
     String profileImage;
@@ -20,17 +21,26 @@ public class User {
     }
 
 
-    public User(String id, String fullname, String phoneNumber, String work, String country, String email, String password, String profileImage, String status, List<String> programming) {
+    public User(String id, String fullname, String phoneNumber, String work, String country, String bio, String email, String password, String profileImage, String status, List<String> programming) {
         this.id = id;
         this.fullname = fullname;
         this.phoneNumber = phoneNumber;
         this.work = work;
         this.country = country;
+        this.bio = bio;
         this.email = email;
         this.password = password;
         this.profileImage = profileImage;
         this.status = status;
         this.programming = programming;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public List<String> getProgramming() {

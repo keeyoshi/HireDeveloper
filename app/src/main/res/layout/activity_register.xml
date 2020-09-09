@@ -84,6 +84,27 @@
            android:textColor="@color/black"
            android:textColorHint="@color/black"
            android:textSize="18dp"/>
+       <View
+           android:layout_width="fill_parent"
+           android:layout_height="1px"
+           android:background="#000000" />
+
+       <EditText
+           android:id="@+id/Bio"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="5dp"
+           android:background="@drawable/input_design"
+           android:drawableLeft="@drawable/contact_24"
+           android:drawablePadding="8dp"
+           android:gravity="center_vertical"
+           android:hint="Say something about yourself"
+           android:inputType="number"
+           android:padding="10dp"
+           android:singleLine="true"
+           android:textColor="@color/black"
+           android:textColorHint="@color/black"
+           android:textSize="18dp"/>
 
        <View
            android:layout_width="fill_parent"

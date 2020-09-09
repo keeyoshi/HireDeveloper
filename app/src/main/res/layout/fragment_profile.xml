@@ -110,6 +110,27 @@
                 android:id="@+id/pro_job_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Example: Build me a mobile/webite..."
+                android:padding="10dp"
+                android:background="@drawable/search_bar"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:layout_margin="6dp"
+                android:textSize="20dp" />
+            <TextView
+                android:text="Short description"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/pro_job_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Example: I want a ...."
                 android:padding="10dp"
                 android:background="@drawable/search_bar"

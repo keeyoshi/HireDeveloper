@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -35,14 +37,18 @@ import com.google.firebase.storage.UploadTask;
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class EditProfileActivity extends AppCompatActivity {
 
     ImageView imageView;
-    EditText name, country, work,email,password,confirmPassword,number;
+    EditText name, country, work,email,password,confirmPassword,number,bio;
     Button btnEdit;
+    LinearLayout editLinearLayout;
     FirebaseUser firebaseUser;
+    CheckBox chkDesign, chkData,chkContent,chkWebsite,chkMobile,chkMarketing;
 
     StorageReference storageReference;
     private Uri imageURl;
@@ -53,7 +59,7 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
+        getSupportActionBar().hide();
         imageView = findViewById(R.id.editProfileImage);
         name = findViewById(R.id.editName);
         country = findViewById(R.id.editCountry);
@@ -64,9 +70,17 @@ public class EditProfileActivity extends AppCompatActivity {
         confirmPassword = findViewById(R.id.editConfirmPassword);
         progressBar =findViewById(R.id.editProgressBar);
         btnEdit = findViewById(R.id.btnEditProfile);
-
+        bio = findViewById(R.id.editBio);
+        chkContent= findViewById(R.id.edit_chkContentDev);
+        chkData= findViewById(R.id.edit_chkDataDev);
+        chkMobile= findViewById(R.id.edit_chkMobileDev);
+        chkMarketing= findViewById(R.id.edit_chkMarketingDev);
+        chkWebsite= findViewById(R.id.edit_chkWebsiteDev);
+        chkDesign= findViewById(R.id.edit_chkDesignDev);
+        editLinearLayout = findViewById(R.id.edit_programmingList);
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference("ProfileImages");
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
@@ -79,6 +93,39 @@ public class EditProfileActivity extends AppCompatActivity {
                 work.setText(user.getWork());
                 email.setText(user.getEmail());
                 password.setText(user.getPassword());
+                bio.setText(user.getBio());
+                List<String> programming= user.getProgramming();
+                for(String program:programming)
+                {
+                    if(program.equals("Null"))
+                    {
+                        editLinearLayout.setVisibility(View.GONE);
+                    }
+                    else if(program.equals("Website")){
+                        chkWebsite.setChecked(true);
+                    }
+                    else if(program.equals("Data"))
+                    {
+                        chkData.setChecked(true);
+                    }
+                    else if(program.equals("Marketing"))
+                    {
+                        chkMarketing.setChecked(true);
+                    }
+                    else if(program.equals("Content"))
+                    {
+                        chkContent.setChecked(true);
+                    }
+                    else if(program.equals("Mobile"))
+                    {
+                        chkMobile.setChecked(true);
+                    }
+                    else if(program.equals("Design"))
+                    {
+                        chkDesign.setChecked(true);
+                    }
+
+                }
                 if(user.getProfileImage().equals("Default"))
                 {
                     imageView.setImageResource(R.drawable.male);
@@ -106,6 +153,37 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(password.getText().toString().equals(confirmPassword.getText().toString()))
                 {
+                    final List<String> list=new ArrayList<String>();
+                    if(chkContent.isChecked())
+                    {
+                        list.add("Content");
+                    }
+                    if(chkData.isChecked())
+                    {
+                        list.add("Data");
+                    }
+                    if(chkDesign.isChecked())
+                    {
+                        list.add("Design");
+                    }
+                    if(chkMobile.isChecked())
+                    {
+                        list.add("Mobile");
+                    }
+                    if(chkWebsite.isChecked())
+                    {
+                        list.add("Website");
+                    }
+                    if(chkMarketing.isChecked())
+                    {
+                        list.add("Marketing");
+                    }
+                    if(list.size()==0)
+                    {
+                        Toast.makeText(EditProfileActivity.this, "Please select a Interested development field to be updated", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     progressBar.setVisibility(View.VISIBLE);
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
                     HashMap<String, Object> hashMap = new HashMap<>();
@@ -115,6 +193,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     hashMap.put("password",password.getText().toString());
                     hashMap.put("phoneNumber",number.getText().toString());
                     hashMap.put("work",work.getText().toString());
+                    hashMap.put("bio",bio.getText().toString());
+                    hashMap.put("programming",list);
                     databaseReference.updateChildren(hashMap);
                     uploadImage();
 

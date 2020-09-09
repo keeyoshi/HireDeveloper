@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText password,fullname,phoneNumber, email,work;
+    EditText password,fullname,phoneNumber, email,work,bio;
     Button btnRegister;
     TextView LoginButton;
     FirebaseAuth firebaseAuth;
@@ -45,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().setTitle("Register user");
         programmingList= findViewById(R.id.programmingList);
         Intent intent = getIntent();
         final String as = intent.getStringExtra("As");
@@ -64,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         work = findViewById(R.id.workPlace);
         phoneNumber = findViewById(R.id.phonenumber);
         btnRegister = findViewById(R.id.register);
+        bio = findViewById(R.id.Bio);
         LoginButton=findViewById(R.id.login);
         chkContent= findViewById(R.id.chkContentDev);
         chkData= findViewById(R.id.chkDataDev);
@@ -91,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final String pass = password.getText().toString();
                 final String name = fullname.getText().toString();
                 final String workP = work.getText().toString();
+                final String Bio = bio.getText().toString();
                 final String emailAddress = email.getText().toString();
                 final String  number= phoneNumber.getText().toString();
                 final String image = "Default";
@@ -120,7 +123,10 @@ public class RegisterActivity extends AppCompatActivity {
                     work.setError("Work Place not Entered");
                     work.requestFocus();
                 }
-
+                else if(TextUtils.isEmpty(Bio)){
+                    bio.setError("Work Place not Entered");
+                    bio.requestFocus();
+                }
 
                 else if(!emailAddress.matches(emailPattern)){
                     email.setError("Email format incorrect");
@@ -178,7 +184,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(), name, number, workP, userName, emailAddress, pass, image,"online",list);
+                                        User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(), name, number, workP, userName,Bio, emailAddress, pass, image,"online",list);
                                         FirebaseDatabase.getInstance().getReference("Users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(user);

@@ -65,7 +65,6 @@ public class ProfileFragment extends Fragment {
 
     ImageButton addPhoto;
     ImageView eventImage;
-    EditText content,jobTitle;
     Spinner spinner,price;
     Button btnPost;
     LinearLayout addJobLayout;
@@ -79,6 +78,7 @@ public class ProfileFragment extends Fragment {
     DatePickerDialog.OnDateSetListener onDateSetListener;
     TextView dateTimePicker;
     String date;
+    EditText content,jobTitle,jobDescription;
     CheckBox chkDesign, chkData,chkContent,chkWebsite,chkMobile,chkMarketing;
 
 
@@ -104,6 +104,7 @@ public class ProfileFragment extends Fragment {
         progressBar = view.findViewById(R.id.progress);
         jobTitle = view.findViewById(R.id.pro_job_title);
         price = view.findViewById(R.id.pro_job_price);
+        jobDescription = view.findViewById(R.id.pro_job_description);
         dateTimePicker = view.findViewById(R.id.tvDatetimePicker);
         chkContent= view.findViewById(R.id.chkContentDev1);
         chkData= view.findViewById(R.id.chkDataDev1);
@@ -242,17 +243,19 @@ public class ProfileFragment extends Fragment {
         else
         {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Jobs");
-            String postId = reference.push().getKey();
+            String jobId = reference.push().getKey();
             HashMap<String,Object> hashMap = new HashMap<>();
             hashMap.put("title",jobTitle.getText().toString());
             hashMap.put("price",price.getSelectedItem().toString());
             hashMap.put("date",dateTimePicker.getText().toString());
-            hashMap.put("id",postId);
+            hashMap.put("id",jobId);
+            hashMap.put("description",jobDescription.getText().toString());
             hashMap.put("userId",firebaseUser.getUid());
             hashMap.put("requirement",list);
-            reference.push().setValue(hashMap);
+            reference.child(jobId).setValue(hashMap);
             Toast.makeText(getContext(), "Job posted", Toast.LENGTH_SHORT).show();
             jobTitle.setText("");
+            jobDescription.setText("");
             dateTimePicker.setText("Click to select a date");
             chkContent.setChecked(false);
             chkData.setChecked(false);
@@ -328,7 +331,7 @@ public class ProfileFragment extends Fragment {
                         hashMap.put("eventImage",mUri);
                         hashMap.put("userId",firebaseUser.getUid());
                         hashMap.put("postId",postId);
-                        reference.push().setValue(hashMap);
+                        reference.child(postId).setValue(hashMap);
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                         content.setText("");
@@ -355,9 +358,8 @@ public class ProfileFragment extends Fragment {
             hashMap.put("content",text);
             hashMap.put("eventImage","Blank");
             hashMap.put("userId",firebaseUser.getUid());
-            hashMap.put("id",reference.push().getKey());
 
-            reference.child("Events").push().setValue(hashMap);
+            reference.child("Events").child(postId).setValue(hashMap);
             progressBar.setVisibility(View.GONE);
             Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
             content.setText("");

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".Activity.AddBidActivity">
+
+
+    <Button
+        android:id="@+id/btnBack"
+        android:background="@drawable/ic_baseline_arrow_back_24"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+    <TextView
+        android:text="Place a bid on "
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tvJobTitle"
+        android:text="Paid to you"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+    android:text="Paid to you"
+    android:textSize="18dp"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:id="@+id/bidPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="USD"
+        android:padding="10dp"
+        android:background="@drawable/search_bar"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:layout_margin="6dp"
+        android:textSize="20dp" />
+    <TextView
+        android:text="Deliver in"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:id="@+id/bidDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Days"
+        android:padding="10dp"
+        android:background="@drawable/search_bar"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:layout_margin="6dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:text="Describe your bid"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_marginTop="10dp"
+        android:inputType="text"
+        android:id="@+id/bidDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/search_bar"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:layout_margin="6dp"
+        android:textSize="20dp" />
+    <Button
+        android:id="@+id/btnPlaceBid"
+        android:text="Place a Bid"
+        android:background="#7CA9EF"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

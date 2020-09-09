@@ -20,10 +20,12 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
     Context context;
     List<Job> jobList;
+    String category;
 
-    public JobAdapter(Context context, List<Job> jobList) {
+    public JobAdapter(Context context, List<Job> jobList, String category) {
         this.context = context;
         this.jobList = jobList;
+        this.category = category;
     }
 
     @NonNull
@@ -45,6 +47,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(context, SingleJobActivity.class);
                 intent.putExtra("JobId",job.getId());
+                intent.putExtra("category",category);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

@@ -48,10 +48,10 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
+        getSupportActionBar().setTitle("Settings");
         Logout=findViewById(R.id.logout);
-        NotificationSetting=findViewById(R.id.txt_notification);
-        BrightNessSetting=findViewById(R.id.txt_brightness);
+//        NotificationSetting=findViewById(R.id.txt_notification);
+//        BrightNessSetting=findViewById(R.id.txt_brightness);
         seekBar=findViewById(R.id.seek_bar);
         Result1=findViewById(R.id.txt_result);
         view2=findViewById(R.id.view2);
@@ -118,19 +118,19 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         
-        NotificationSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                notificationSetting();
-            }
-        });
-
-        BrightNessSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                brigntNessSetting();
-            }
-        });
+//        NotificationSetting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                notificationSetting();
+//            }
+//        });
+//
+//        BrightNessSetting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                brigntNessSetting();
+//            }
+//        });
         
     }
 

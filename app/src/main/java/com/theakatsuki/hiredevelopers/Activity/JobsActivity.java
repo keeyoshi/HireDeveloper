@@ -39,7 +39,7 @@ public class JobsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
-
+        getSupportActionBar().hide();
         job = findViewById(R.id.btnShowJobs);
         dev = findViewById(R.id.btnShowDevelopers);
         jobRecyclerView = findViewById(R.id.recyclerViewJobActivity);
@@ -121,7 +121,7 @@ public class JobsActivity extends AppCompatActivity {
 
                 }
                 Collections.reverse(jobList);
-                JobAdapter jobAdapter = new JobAdapter(getApplicationContext(),jobList);
+                JobAdapter jobAdapter = new JobAdapter(getApplicationContext(),jobList,category);
                 jobRecyclerView.setAdapter(jobAdapter);
             }
 

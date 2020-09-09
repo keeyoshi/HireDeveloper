@@ -16,7 +16,7 @@ public class UserOptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_option);
-
+        getSupportActionBar().setTitle("Registration selection");
         userLinear= findViewById(R.id.UserLinear);
         developerLinear= findViewById(R.id.DeveloperLinear);
 

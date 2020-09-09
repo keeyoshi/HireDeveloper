@@ -69,6 +69,7 @@ public class MessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        getSupportActionBar().hide();
         profile_image= findViewById(R.id.profile_image);
         tvusername=findViewById(R.id.username);
         recyclerView = findViewById(R.id.recycleView);

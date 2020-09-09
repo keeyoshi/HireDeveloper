@@ -18,12 +18,13 @@
         android:id="@+id/navigation_profile"
         android:name="com.theakatsuki.hiredevelopers.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.theakatsuki.hiredevelopers.ui.notifications.NotificationsFragment"
-        tools:layout="@layout/fragment_notifications" />
+
     <fragment
         android:id="@+id/navigation_developers"
         android:name="com.theakatsuki.hiredevelopers.ui.developer.DeveloperFragment"
         tools:layout="@layout/fragment_developer" />
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.theakatsuki.hiredevelopers.ui.notifications.NotificationsFragment"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>
