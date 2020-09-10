@@ -44,7 +44,7 @@ public class CommentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
-
+        getSupportActionBar().hide();
         final String postId = getIntent().getStringExtra("PostId");
         like= findViewById(R.id.textViewLikeCount);
         btnLike= findViewById(R.id.btnLike2);
@@ -150,7 +150,6 @@ public class CommentActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Comment send", Toast.LENGTH_SHORT).show();
             commentBox.setText("");
-            readComments(postId);
         }
 
     }

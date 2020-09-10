@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,86 +7,269 @@
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
 
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/abl"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:background="@color/colorPrimaryDark"
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/MenuStyle">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/profile_spinner"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"/>
+
+                    <ImageButton
+                        android:id="@+id/addPhoto"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_baseline_add_a_photo_24"
+                        android:layout_toLeftOf="@id/btnPostEvent"
+                        android:layout_width="30dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_height="30dp"/>
+
+                    <Button
+                        android:id="@+id/btnPostEvent"
+                        android:text="Post"
+                        android:textSize="16dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/addEventContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/MenuStyle">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            android:hint="@string/add_event_hint"
+            android:padding="10dp"
+            android:background="@drawable/search_bar"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:layout_margin="6dp"
+            android:textSize="20dp" />
 
+        <ProgressBar
+            android:id="@+id/progress"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
+        <ImageView
+            android:id="@+id/showEventImage"
+            android:layout_width="match_parent"
+            android:layout_below="@id/abl"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_baseline_add_a_photo_24"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/addJobLayout"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Name for the job"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/pro_job_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Example: Build me a mobile/webite..."
+                android:padding="10dp"
+                android:background="@drawable/search_bar"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:layout_margin="6dp"
+                android:textSize="20dp" />
+            <TextView
+                android:text="Short description"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/pro_job_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Example: I want a ...."
+                android:padding="10dp"
+                android:background="@drawable/search_bar"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:layout_margin="6dp"
+                android:textSize="20dp" />
+            <TextView
+                android:text="Price"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Spinner
+                android:id="@+id/pro_job_price"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
+            <LinearLayout
+                android:id="@+id/requirementList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/add_event_username"
-                    android:text=""
-                    android:hint="User Name"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Interested field"
+                    android:textColor="@color/black"
                     android:textSize="18dp"
+                    android:textStyle="bold" />
+
+
+                <CheckBox
+                    android:id="@+id/chkWebsiteDev1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="7dp"
+                    android:text="Website development"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
+                    tools:ignore="InvalidId" />
+
+                <CheckBox
+                    android:id="@+id/chkDesignDev1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="7dp"
+                    android:text="Design and Architecture"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/addPhoto"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_baseline_add_a_photo_24"
-                    android:layout_toLeftOf="@id/btnPostEvent"
-                    android:layout_width="30dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_height="30dp"/>
-
-                <Button
-                    android:id="@+id/btnPostEvent"
-                    android:text="Post"
-                    android:textSize="16dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/colorPrimaryDark"
+                <CheckBox
+                    android:id="@+id/chkContentDev1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="7dp"
+                    android:text="Content writing"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="InvalidId" />
 
-    <EditText
-        android:layout_marginTop="10dp"
-        android:id="@+id/addEventContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/add_event_hint"
-        android:padding="10dp"
-        android:background="@drawable/search_bar"
-        android:textColor="#000"
-        android:textColorHint="#000"
-        android:layout_margin="6dp"
-        android:textSize="20dp" />
+                <CheckBox
+                    android:id="@+id/chkMarketingDev1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="7dp"
+                    android:text="Sales and marketing "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="InvalidId" />
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkMobileDev1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="7dp"
+                    android:text="Mobile application development"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="InvalidId" />
 
-    <ImageView
-        android:id="@+id/showEventImage"
-        android:layout_width="match_parent"
-        android:layout_below="@id/abl"
-        android:layout_marginBottom="15dp"
-        android:visibility="gone"
-        android:layout_margin="6dp"
-        android:src="@drawable/ic_baseline_add_a_photo_24"
-        android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/chkDataDev1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:text="Data and admin"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="InvalidId" />
 
-</LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:text="Project closing date"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvDatetimePicker"
+                android:text="Click to select a date"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

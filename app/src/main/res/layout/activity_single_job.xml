@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".Activity.SingleJobActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/JobDetails"
+        android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/show_job_title"
+                android:textSize="25dp"
+                android:text="Project title "
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000" />
+            <TextView
+                android:id="@+id/show_job_description"
+                android:textSize="15dp"
+                android:padding="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Sdfadsfas"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000" />
+
+            <TextView
+                android:padding="5dp"
+                android:textSize="20dp"
+                android:text="Project Budget (USD)"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/show_job_price"
+                android:textSize="25dp"
+                android:text="$30 -250"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000" />
+
+            <TextView
+                android:padding="5dp"
+                android:textSize="20dp"
+                android:text="Average Bid (USD)"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/showAverageBid"
+                android:textSize="25dp"
+                android:text="$100"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#000000" />
+            <TextView
+                android:id="@+id/show_Bids"
+                android:textSize="25dp"
+                android:text="Bids "
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewBid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnBid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp"
+            android:background="#88AFF1"
+            android:padding="20dp"
+            android:text="place a bid"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/editJobDetails"
+        android:layout_height="wrap_content">
+
+
+
+        <TextView
+            android:text="Name for the job"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/pro_job_title1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Example: Build me a mobile/webite..."
+            android:padding="10dp"
+            android:background="@drawable/search_bar"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:layout_margin="6dp"
+            android:textSize="20dp" />
+        <TextView
+            android:text="Short description"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/pro_job_description1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Example: I want a ...."
+            android:padding="10dp"
+            android:background="@drawable/search_bar"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:layout_margin="6dp"
+            android:textSize="20dp" />
+        <TextView
+            android:text="Price"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/pro_job_price1"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+        <LinearLayout
+            android:id="@+id/requirementList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Interested field"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+            <CheckBox
+                android:id="@+id/chkWebsiteDev2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="7dp"
+                android:text="Website development"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="InvalidId" />
+
+            <CheckBox
+                android:id="@+id/chkDesignDev2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="7dp"
+                android:text="Design and Architecture"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/chkContentDev2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="7dp"
+                android:text="Content writing"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="InvalidId" />
+
+            <CheckBox
+                android:id="@+id/chkMarketingDev2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="7dp"
+                android:text="Sales and marketing "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="InvalidId" />
+
+            <CheckBox
+                android:id="@+id/chkMobileDev2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="7dp"
+                android:text="Mobile application development"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="InvalidId" />
+
+            <CheckBox
+                android:id="@+id/chkDataDev2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="Data and admin"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="InvalidId" />
+
+        </LinearLayout>
+
+        <TextView
+            android:text="Project closing date"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvDatetimePicker1"
+            android:text="Click to select a date"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnUpdateJob"
+            android:layout_width="match_parent"
+            android:text="Update job details"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

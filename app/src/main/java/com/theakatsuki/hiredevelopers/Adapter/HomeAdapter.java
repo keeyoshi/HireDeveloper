@@ -53,8 +53,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull final Viewholder holder, int position) {
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
        final Events event = events.get(position);
        holder.content.setText(event.getContent());
        checkFollowing(event.getUserId(),holder.btnFollow);

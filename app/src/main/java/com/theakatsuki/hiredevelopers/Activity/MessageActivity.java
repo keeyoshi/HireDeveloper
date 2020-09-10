@@ -69,6 +69,7 @@ public class MessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        getSupportActionBar().hide();
         profile_image= findViewById(R.id.profile_image);
         tvusername=findViewById(R.id.username);
         recyclerView = findViewById(R.id.recycleView);
@@ -82,7 +83,7 @@ public class MessageActivity extends AppCompatActivity {
         texmessage=findViewById(R.id.sendmessage);
         progressBar = findViewById(R.id.progressBar);
         intent=getIntent();
-        userid = intent.getStringExtra("userId");
+        userid = intent.getStringExtra("userid");
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

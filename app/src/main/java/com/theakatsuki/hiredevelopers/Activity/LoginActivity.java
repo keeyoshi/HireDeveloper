@@ -11,11 +11,13 @@ import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,40 +29,36 @@ import com.google.firebase.auth.FirebaseUser;
 import com.theakatsuki.hiredevelopers.R;
 
 
-
 public class LoginActivity extends AppCompatActivity {
     EditText etusername, etpassword;
     Button btnLogin;
     TextView btnCreateNewAccount;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
     TextView resetPassword;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private CheckBox showPassword;
     ProgressDialog loadingBar;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if(firebaseUser!=null)
-        {
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(intent);
-            finish();
-
-        }
-    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        if(firebaseUser!=null)
+//        {
+//            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//
+//        }
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FirebaseAuth.getInstance().signOut();
-        firebaseAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_login);
-
+        getSupportActionBar().hide();
+        firebaseAuth = FirebaseAuth.getInstance();
         progressBar= findViewById(R.id.progressbar);
         etusername = findViewById(R.id.etemail);
         etpassword = findViewById(R.id.etpassword);
@@ -68,7 +66,9 @@ public class LoginActivity extends AppCompatActivity {
         etpassword.setText("password");
         btnLogin = findViewById(R.id.btnLogin);
         resetPassword=findViewById(R.id.forgot_password_text);
-
+        String[] arraySpinner = new String[] {
+                "User","Developer"
+        };
         loadingBar=new ProgressDialog(this);
 
         showPassword=findViewById(R.id.show_password);
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
         btnCreateNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
+                Intent intent = new Intent(getApplicationContext(),UserOptionActivity.class);
                 startActivity(intent);
             }
         });

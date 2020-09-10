@@ -192,14 +192,119 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/proHomeRecyclerView"
                 android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+        <RelativeLayout
+            android:orientation="vertical"
+            android:id="@+id/aboutPage"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvAbout"
+                android:text="About "
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/aboutBio"
+                android:text="Bio"
+                android:textSize="19dp"
+                android:layout_below="@id/tvAbout"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/jobRecyclerView"
-                android:visibility="gone"
+            <TextView
+                android:layout_below="@id/aboutBio"
+                android:id="@+id/tvCountry"
+                android:textSize="18dp"
+                android:text="Country: "
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/aboutCountry"
+                android:text="Nepal"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:layout_below="@id/aboutBio"
+                android:layout_toRightOf="@id/tvCountry"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:id="@+id/tvPhonenumebr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCountry"
+                android:text="Phone number: "
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/aboutPhoneNumber"
+                android:text="986055251"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:layout_below="@id/tvCountry"
+                android:layout_toRightOf="@id/tvPhonenumebr"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_below="@id/aboutPhoneNumber"
+                android:id="@+id/tvwork"
+                android:text="Work: "
+                android:textColor="@color/black"
+                android:textSize="18dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/aboutWork"
+                android:text="Software company"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:layout_below="@id/aboutPhoneNumber"
+                android:layout_toRightOf="@id/tvwork"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_below="@id/aboutWork"
+                android:id="@+id/tvSkills"
+                android:text="Skills: "
+                android:textColor="@color/black"
+                android:textSize="18dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/aboutSkills"
+                android:text=""
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:layout_below="@id/aboutWork"
+                android:layout_toRightOf="@id/tvwork"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnHire"
+                android:text="Hire"
+                android:textSize="20dp"
+                android:layout_below="@id/aboutSkills"
+                android:background="@drawable/input_design"
+                android:layout_width="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
     </LinearLayout>
+
 
 </ScrollView>

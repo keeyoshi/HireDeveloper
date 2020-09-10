@@ -25,33 +25,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.theakatsuki.hiredevelopers.Activity.JobsActivity;
-import com.theakatsuki.hiredevelopers.Adapter.JobAdapter;
-import com.theakatsuki.hiredevelopers.Model.Job;
+
 import com.theakatsuki.hiredevelopers.Model.User;
 import com.theakatsuki.hiredevelopers.R;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class DeveloperFragment extends Fragment {
 
-    RecyclerView jobRecyclerView, mResultList;
-    JobAdapter jobAdapter;
-    List<Job> jobs;
+    RecyclerView  mResultList;
     EditText mSearchField;
     ImageButton mSearchBtn;
     LinearLayout webLinear,designLinear,writingLinear,salesLinear,mobileLinear,dataLinear;
-    RecyclerView.LayoutManager layoutManager;
     DatabaseReference mUserDatabase;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_developer, container, false);
-
-
-
         webLinear = view.findViewById(R.id.webLinear);
         designLinear = view.findViewById(R.id.designLinear);
         writingLinear = view.findViewById(R.id.writingLinear);
@@ -62,6 +54,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Website");
                 startActivity(intent);
             }
         });
@@ -69,6 +62,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Design");
                 startActivity(intent);
             }
         });
@@ -76,6 +70,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Content");
                 startActivity(intent);
             }
         });
@@ -83,6 +78,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Marketing");
                 startActivity(intent);
             }
         });
@@ -90,6 +86,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Mobile");
                 startActivity(intent);
             }
         });
@@ -97,6 +94,7 @@ public class DeveloperFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), JobsActivity.class);
+                intent.putExtra("category","Data");
                 startActivity(intent);
             }
         });
@@ -136,7 +134,7 @@ public class DeveloperFragment extends Fragment {
 
         Query firebaseSearchQuery = mUserDatabase.orderByChild("fullname").startAt(searchText).endAt(searchText + "\uf8ff");
 
-        FirebaseRecyclerAdapter<User, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UsersViewHolder>(
+        FirebaseRecyclerAdapter<User, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User,UsersViewHolder>(
 
                 User.class,
                 R.layout.list_layout,
@@ -158,7 +156,6 @@ public class DeveloperFragment extends Fragment {
     }
 
 
-    // View Holder Class
 
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
 
@@ -180,8 +177,15 @@ public class DeveloperFragment extends Fragment {
 
             user_name.setText(fullname);
             user_status.setText(userStatus);
+            if(userImage.equals("Default"))
+            {
+                Glide.with(ctx).load(R.drawable.male).into(user_image);
 
-            Glide.with(ctx).load(userImage).into(user_image);
+            }
+            else{
+                Glide.with(ctx).load(userImage).into(user_image);
+            }
+
 
 
         }
