@@ -108,6 +108,7 @@ public class MessageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         storageReference = FirebaseStorage.getInstance().getReference("MessageImages");
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         refrences= FirebaseDatabase.getInstance().getReference("Users").child(userid);
@@ -302,7 +303,7 @@ public class MessageActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
                     if(chat.getMsgReceiver().equals(userid) && chat.getMsgSender().equals(myid)||
-                    chat.getMsgReceiver().equals(myid) && chat.getMsgSender().equals(userid))
+                            chat.getMsgReceiver().equals(myid) && chat.getMsgSender().equals(userid))
                     {
                         chats.add(chat);
                     }

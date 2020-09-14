@@ -16,53 +16,29 @@ import org.junit.runners.JUnit4;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.modules.junit4.PowerMockRunnerDelegate;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
-@RunWith(PowerMockRunner.class)
-@PowerMockRunnerDelegate(JUnit4.class)
-@PrepareForTest({FirebaseDatabase.class})
 public class LoginTesting {
 
-    private DatabaseReference mockedDatabaseReference;
-
-    @Before
-    public void before(){
-        mockedDatabaseReference= Mockito.mock(DatabaseReference.class);
-
-        FirebaseDatabase mockedFirebaseDatabase = Mockito.mock(FirebaseDatabase.class);
-        when(mockedFirebaseDatabase.getReference()).thenReturn(mockedDatabaseReference);
-
-        PowerMockito.mockStatic(FirebaseDatabase.class);
-        when(FirebaseDatabase.getInstance()).thenReturn(mockedFirebaseDatabase);
-
-    }
-
     @Test
-    public void getSignedInUserProfileTest() {
-        when(mockedDatabaseReference.child(anyString())).thenReturn(mockedDatabaseReference);
-
-        doAnswer(new Answer<Void>() {
+    public void logingUserTesting(){
+        FirebaseAuth auth = Mockito.mock(FirebaseAuth.class);
+        final Task<AuthResult> mockedAuth = Mockito.mock(Task.class);
+        when(auth.signInWithEmailAndPassword("hireDeveloperTest@gmail.com","password"))
+                .thenReturn(mockedAuth);
+        Mockito.doAnswer(new Answer() {
             @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                ValueEventListener valueEventListener = (ValueEventListener) invocation.getArguments()[0];
-
-                DataSnapshot mockedDataSnapshot = Mockito.mock(DataSnapshot.class);
-
-                valueEventListener.onDataChange(mockedDataSnapshot);
-
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                Task<AuthResult> authResult = invocation.getArgument(0,Task.class);
+                assertEquals(true,authResult.isSuccessful());
                 return null;
             }
         });
 
-
     }
+
 }

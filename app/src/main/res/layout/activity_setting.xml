@@ -15,16 +15,6 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Setting"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:textAlignment="center"
-        android:background="@drawable/horizontal_line"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

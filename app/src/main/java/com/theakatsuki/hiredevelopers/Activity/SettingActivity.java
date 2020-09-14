@@ -81,7 +81,6 @@ public class SettingActivity extends AppCompatActivity {
                 {
                     brigtness = progress;
                 }
-                //Calculate the brightness percentage
                 float perc = (brigtness /(float)255)*100;
                 Result1.setText((int)perc +" %");
             }
@@ -115,6 +114,7 @@ public class SettingActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                startActivity(intent);
+               finish();
             }
         });
         
@@ -135,9 +135,6 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void brigntNessSetting() {
-
-
-
         if(view2.getVisibility()==View.GONE){
             view2.setVisibility(View.VISIBLE);
             seekBar.setVisibility(View.VISIBLE);
@@ -155,20 +152,21 @@ public class SettingActivity extends AppCompatActivity {
         builder.setTitle("Notification Settings");
         builder.setMessage("Do you want to turn off Notification");
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("On", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(SettingActivity.this, "Notification will be Turn OFf", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingActivity.this, "Notification will be Turn On", Toast.LENGTH_SHORT).show();
 
                 Intent intent=new Intent(SettingActivity.this,SettingActivity.class);
                 startActivity(intent);
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("OFf", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
+                Toast.makeText(SettingActivity.this, "Notification will be Turn OFf", Toast.LENGTH_SHORT).show();
             }
         });
         builder.show();
